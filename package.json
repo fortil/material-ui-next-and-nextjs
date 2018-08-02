@@ -1,0 +1,53 @@
+{
+  "name": "gas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "William Penagos <billalpeza@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "next",
+    "build": "next build",
+    "export": "next export",
+    "run": "next start",
+    "clean": "rd /q /s .next &&  rd /q /s out",
+    "deploy": "npm run clean && npm run build && npm run export && firebase deploy"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-brands": "^5.0.13",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/react-fontawesome": "^0.0.20",
+    "@zeit/next-css": "0.1.5",
+    "axios": "0.18.0",
+    "idb": "2.1.1",
+    "jimp": "0.2.28",
+    "jss": "9.8.1",
+    "material-ui": "next",
+    "material-ui-html-field": "0.1.3",
+    "next": "5.1.0",
+    "next-images": "0.10.1",
+    "prop-types": "15.6.1",
+    "react": "16.3.1",
+    "react-dom": "16.3.1",
+    "react-free-style": "7.0.0",
+    "react-google-maps": "9.4.5",
+    "react-jss": "8.4.0",
+    "react-loading": "^2.0.3",
+    "react-owl-carousel": "2.2.0",
+    "react-pdf": "^3.0.5",
+    "react-redux": "5.0.7",
+    "react-responsive-carousel": "^3.1.41",
+    "react-tap-event-plugin": "3.0.2",
+    "react-youtube": "^7.6.0",
+    "recompose": "0.26.0",
+    "redux": "3.7.2",
+    "redux-devtools-extension": "2.13.2",
+    "redux-thunk": "2.2.0",
+    "styled-components": "^3.3.3",
+    "sweetalert": "^2.1.0"
+  },
+  "devDependencies": {
+    "redux-logger": "3.0.6",
+    "styled-jsx": "2.2.6"
+  }
+}

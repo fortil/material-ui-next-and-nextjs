@@ -1,0 +1,8 @@
+node_modules/
+yarn.lock
+.next/
+launchConfigurations/
+out/
+.env
+.firebaserc
+*.yml

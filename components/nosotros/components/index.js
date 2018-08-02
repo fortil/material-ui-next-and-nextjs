@@ -1,0 +1,7 @@
+export { default as historia } from './historia'
+export { default as quienessomos } from './quienessomos'
+export { default as nuestrosgc } from './nuestrosgc'
+export { default as presencia } from './presencia'
+export { default as politicas } from './politicas'
+// export { default as ingresehojadevida } from './ingresehojadevida'
+export { default as ingresehojadevida } from '../containers/ingresehojadevida'
