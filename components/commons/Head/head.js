@@ -5,7 +5,7 @@ import Toolbar from 'material-ui/Toolbar'
 import IconButton from 'material-ui/IconButton'
 import Icon from 'material-ui/Icon'
 import { primaryBG, globalStyles, header, flex } from '../../../src/styles'
-import LOGO from '../../../static/logo.svg'
+import LOGO from '../../../static/logo2.svg'
 
 const styles = theme => ({
   image: {
