@@ -105,7 +105,7 @@ const toolbarStyles = theme => ({
 });
 
 let ComponentTableToolbar = props => {
-  const { numSelected, classes, title, prelabel } = props
+  const { numSelected, classes, title, prelabel, switchActive } = props
   return (
     <Toolbar
       className={classNames(classes.root)}
@@ -122,7 +122,7 @@ let ComponentTableToolbar = props => {
           )}
       </div>
       <div className={classes.spacer} />
-      <div className={classes.actions}>
+      <div className={classes.actions} style={{ ...(!switchActive ? { display: 'none' } : {}) }}>
         <Tooltip title={props.active ? 'Ver eliminados' : 'Ver activos'}>
           <IconButton aria-label='eliminados' onClick={() => props.filterUsers(!props.active)}>
             <Icon style={{ color: 'white' }}>{props.active ? 'restore_from_trash' : 'face'}</Icon>
@@ -136,6 +136,7 @@ let ComponentTableToolbar = props => {
 ComponentTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
   resetSelected: PropTypes.func.isRequired,
+  switchActive: PropTypes.bool.isRequired,
 };
 
 
@@ -231,7 +232,7 @@ class ComponentTable extends React.Component {
         }
       })
       .then(() => {
-        this.props.getInitFn()
+        this.props.getInitFn(true)
         swal('Actualizado con éxito!', 'Has actualizado exitosamente un registro!!', 'success')
           .then(() => {
             if (redirect) {
@@ -250,6 +251,7 @@ class ComponentTable extends React.Component {
         }
         swal.stopLoading()
         swal.close()
+        this.props.getInitFn(true)
       })
   }
 
@@ -262,9 +264,9 @@ class ComponentTable extends React.Component {
   };
 
   render() {
-    const { classes, columnData, title, prelabel, actions } = this.props
+    const { classes, columnData, title, prelabel, actions, switchActive } = this.props
     const { data, order, orderBy, rowsPerPage, page } = this.state
-    const dataFiltered = data.filter(e => e.active === this.state.active)
+    const dataFiltered = switchActive ? data.filter(e => e.active === this.state.active) : data
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, dataFiltered.length - page * rowsPerPage);
     
     return (
@@ -272,6 +274,7 @@ class ComponentTable extends React.Component {
         <Paper className={[classes.root, classes.bgOrange].join(' ')}>
           <ComponentTableToolbar
             active={this.state.active}
+            switchActive={switchActive}
             title={title}
             prelabel={prelabel}
             filterUsers={act => this.setState({ active: act })}
@@ -367,6 +370,11 @@ ComponentTable.propTypes = {
   columnData: PropTypes.array,
   actions: PropTypes.array.isRequired,
   getInitFn: PropTypes.func,
+  switchActive: PropTypes.bool,
+}
+
+ComponentTable.defaultProps = {
+  switchActive: true
 }
 
 export default withStyles(styles, { withTheme: true, name: 'ComponentTableAdmin' })(ComponentTable)

@@ -12,15 +12,17 @@ export const INITIAL_STATE_EMAIL = {
 REDUCERS
 */
 export const emails = (state = INITIAL_STATE_EMAIL, action) => {
+  let emailsValue = state.data
   switch (action.type) {
     case 'SET_EMAIL':
+      emailsValue = action.email.map(email => Object.assign(email, { codeDesc: email.code }))
       return {
         ...state,
-        fetching: true,
-        data: [...action.email]
+        fetching: false,
+        data: [...emailsValue]
       }
     case 'UPDATE_ACTION_EMAIL':
-      const email = state.data.map(email => {
+      const email = emailsValue.map(email => {
         if (email.id === action.email.id) {
           return Object.assign({}, email, action.email)
         }
@@ -31,8 +33,17 @@ export const emails = (state = INITIAL_STATE_EMAIL, action) => {
         data: [...email]
       }
     case 'SET_EMAIL_CODE':
+      emailsValue = emailsValue.map(email => {
+        action.email.forEach(code => {
+          if (code.code === email.code) {
+            email.codeDesc = code.description
+          }
+        })
+        return email
+      })
       return {
         ...state,
+        data: [...emailsValue],
         codes: [...action.email]
       }
     default:

@@ -70,7 +70,6 @@ class FormAdmin extends React.Component {
       error = this.state[prop].validate.reduce((prev, validateFn) =>
         !validateFn(value) || prev,
         false)
-      console.log(this.state[prop], error)
     }
     this.setState({
       [prop]: Object.assign({}, this.state[prop], { value, error })
@@ -106,14 +105,21 @@ class FormAdmin extends React.Component {
         }))
       )
       this.props.actions.createFn(inputsToCreate)
-      const inputsToCreateEmpty = Object.assign(
-        {},
-        ...inputs.map(input => ({
-          [input.name]: Object.assign({}, { value: '', error: false }, input)
-        }))
-      )
-      this.setState(inputsToCreateEmpty)
-      Router.push(redirect.url, redirect.path)
+        .then(() => {
+          const inputsToCreateEmpty = Object.assign(
+            {},
+            ...inputs.map(input => ({
+              [input.name]: Object.assign({}, { value: '', error: false }, input)
+            }))
+          )
+          this.setState(inputsToCreateEmpty)
+          if (redirect) {
+            Router.push(redirect.url, redirect.path)
+          }
+        })
+        .catch(error => {
+          swal(error.message, error.detail, 'error')
+        })
     }
   }
 
@@ -213,7 +219,10 @@ FormAdmin.propTypes = {
   botonlabel: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   actions: PropTypes.object.isRequired,
-  redirect: PropTypes.object.isRequired,
+  redirect: PropTypes.shape({
+    url: PropTypes.string,
+    path: PropTypes.string
+  }).isRequired,
   inputs: PropTypes.array.isRequired
 }
 

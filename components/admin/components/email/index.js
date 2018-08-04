@@ -5,7 +5,7 @@ import { validateEmail } from '../../../../lib/utils'
 import { connect } from 'react-redux'
 import Form from '../form'
 import Table from '../table'
-import { INITIAL_STATE_EMAIL } from '../../../../redux/reducers/emails'
+import { INITIAL_STATE_EMAIL, setEmailCode } from '../../../../redux/reducers/emails'
 
 const inputs = [
   { icon: '', type: 'select', name: 'code', label: 'Tipo de email' },
@@ -54,7 +54,7 @@ Create.propTypes = {
 }
 
 const mapDispatchToPropsCreate = dispatch => ({
-  createFn: data => dispatch(actionHttp('email', 'create', data)),
+  createFn: data => dispatch(actionHttp('parameter', 'createemail', data)),
   getCodes: () => dispatch(getHttp('parameter', 'getemailcodes')),
 })
 
@@ -63,45 +63,63 @@ const mapStateToPropsCreate = (state = { emails: INITIAL_STATE_EMAIL }) => ({ co
 const create = connect(mapStateToPropsCreate, mapDispatchToPropsCreate)(Create)
 
 const columnData = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Nombre de la Circular' },
-  { id: 'url', numeric: false, disablePadding: true, label: 'Enlace', type: 'link' },
-  { id: 'creationDate', numeric: false, disablePadding: true, label: 'Creado' }
+  { id: 'id', numeric: false, disablePadding: true, label: 'ID' },
+  { id: 'codeDesc', numeric: false, disablePadding: true, label: 'Tipo' },
+  { id: 'value', numeric: false, disablePadding: true, label: 'Email' }
 ]
 class List extends React.Component {
   render() {
-    const { getEmails, emails, actionEmail } = this.props
+    const { getInit, emails, actionEmail } = this.props
     return <Table
-      title='Circulares de Firmas Registradas'
-      prelabel='Circulares'
+      title='Email registrados'
+      prelabel='Email'
       actions={
         [
           {
             fn: actionEmail,
             show: true,
             labelActive: 'Eliminar',
-            labelDeActive: 'Activar',
             iconActive: 'delete_outline',
-            iconDeActive: 'publish'
           }
         ]
       }
       columnData={columnData}
-      getInitFn={getEmails}
+      getInitFn={getInit}
+      switchActive={false}
       filterDate={['creationDate']}
       data={emails}
     />
   }
 }
 
+function getInit(active) {
+  return (dispatch, getState) => {
+    const state = getState()
+    const codes = state.emails.codes
+    const emails = state.emails.data
+    if (!emails.length || active) {
+      dispatch(getHttp('parameter', 'getallemails')).then(value => {
+        if (!codes.length) {
+          dispatch(getHttp('parameter', 'getemailcodes'))
+        } else {
+          dispatch(setEmailCode(codes))
+        }
+      })
+    }
+  }
+}
 
 const mapDispatchToPropsList = dispatch => ({
-  getEmails: () => dispatch(getHttp('parameter', 'getemailcodes')),
-  actionEmails: (data, state) => {
-    data.active = !state.active
-    return dispatch(actionFrc('fcrmailshot', 'update', data))
+  getInit: () => dispatch(getInit(true)),
+  actionEmail: (data, _) => {
+    const id = [].concat(data.id)
+    return dispatch(actionHttp('parameter', 'deleteemail', { id }))
   },
 })
-const mapStateToPropsList = (state = { emails: INITIAL_STATE_EMAIL }) => ({ emails: state.emails.data })
+const mapStateToPropsList = (state = { emails: INITIAL_STATE_EMAIL }) => ({
+  emails: state.emails.data,
+  codes: state.emails.codes
+})
 
 const list = connect(mapStateToPropsList, mapDispatchToPropsList)(List)
 
