@@ -53,7 +53,7 @@ class BlogHome extends Component {
             <h3 className={[h3, textCenter].join(' ')}><strong>Noticias</strong></h3>
           </Grid>
           <Grid item xs={12}>
-            <Grid spacing={24} container xs={false}>
+            <Grid spacing={24} container>
               {entries.length ? entries.slice(0, 8).map((show, _, array) => {
                 const image = show.imageUrl ? show.imageUrl : `../../static/blog/blog-vintage-1.jpg`
                 const l = array.length > 4 ? 8 - array.length : array.length

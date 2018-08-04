@@ -20,24 +20,30 @@ class ComponentTableHead extends React.Component {
   };
 
   render() {
-    const { order, orderBy, columnData } = this.props;
+    const { order, orderBy, columnData, actions } = this.props;
 
     return (
       <TableHead>
         <TableRow>
-          <TableCell padding='checkbox'>
+          {actions && actions.length ?<TableCell padding='checkbox'>
             <Tooltip title='Acción' enterDelay={300} >
               <TableSortLabel>
                 Acción
               </TableSortLabel>
             </Tooltip>
-          </TableCell>
-          {columnData.map(column => {
+          </TableCell> : ''}
+          {columnData.map((column, i) => {
+            let padding = 'none'
+            if (!(actions && actions.length) && i === 0) {
+              padding = 'default'
+            } else {
+              padding = column.disablePadding ? 'none' : 'default'
+            }
             return (
               <TableCell
                 key={column.id}
                 numeric={column.numeric}
-                padding={column.disablePadding ? 'none' : 'default'}
+                padding={padding}
                 sortDirection={orderBy === column.id ? order : false}
               >
                 <Tooltip
@@ -65,10 +71,10 @@ class ComponentTableHead extends React.Component {
 ComponentTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
   columnData: PropTypes.array.isRequired,
+  actions: PropTypes.array.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
 
@@ -194,16 +200,10 @@ class ComponentTable extends React.Component {
     this.setState({ data, order, orderBy })
   }
 
-  handleSelectAllClick = (_, checked) => {
-    if (checked) {
-      this.setState({ selected: this.state.data.map(n => n.id) });
-      return;
-    }
-    this.setState({ selected: [] });
-  };
-
-  handleClick = provider => {
+  handleClick = (action, provider) => {
     let prov = Object.assign({}, provider)
+    const redirect = this.props.redirect
+
     swal({
       title: 'Seguro que desea realizar esta acción?',
       text: '',
@@ -225,8 +225,7 @@ class ComponentTable extends React.Component {
     })
       .then(result => {
         if (result) {
-          prov.active = !this.state.active
-          return this.props.updateService(prov)
+          return action(prov, { ...this.state })
         } else {
           throw null
         }
@@ -234,15 +233,25 @@ class ComponentTable extends React.Component {
       .then(() => {
         this.props.getInitFn()
         swal('Actualizado con éxito!', 'Has actualizado exitosamente un registro!!', 'success')
+          .then(() => {
+            if (redirect) {
+              Router.push(redirect.url, redirect.path)
+            }
+          })
       })
       .catch(error => {
         if (error) {
           swal(error.message, error.detail, 'error')
+            .then(() => {
+              if (redirect) {
+                Router.push(redirect.url, redirect.path)
+              }
+            })
         }
         swal.stopLoading()
         swal.close()
       })
-  };
+  }
 
   handleChangePage = (_, page) => {
     this.setState({ page });
@@ -253,7 +262,7 @@ class ComponentTable extends React.Component {
   };
 
   render() {
-    const { classes, columnData, title, prelabel } = this.props
+    const { classes, columnData, title, prelabel, actions } = this.props
     const { data, order, orderBy, rowsPerPage, page } = this.state
     const dataFiltered = data.filter(e => e.active === this.state.active)
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, dataFiltered.length - page * rowsPerPage);
@@ -275,12 +284,12 @@ class ComponentTable extends React.Component {
                 order={order}
                 orderBy={orderBy}
                 columnData={columnData}
-                onSelectAllClick={this.handleSelectAllClick}
                 onRequestSort={this.handleRequestSort}
                 rowCount={dataFiltered.length}
+                actions={actions}
               />
               <TableBody>
-                {dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
+                {dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((n, i) => {
                   return (
                     <TableRow
                       hover
@@ -290,23 +299,37 @@ class ComponentTable extends React.Component {
                       key={n.id}
                       selected={false}
                     >
-                      <TableCell padding='checkbox'>
-                        <Tooltip title={this.state.active === true ? 'Eliminar' : 'Activar'}>
-                          <IconButton onClick={() => this.handleClick( n)}>
-                            <Icon style={{ fontSize: 16 }}>{this.state.active === true ? 'delete_outline' : 'publish'}</Icon>
-                          </IconButton>
-                        </Tooltip>
-                      </TableCell>
-                      {columnData.map(e => {
+                      {actions && actions.length ? actions.map((action, i) => {
+                        const active = this.state.active
+                        const show = action.showOnlyActive && active === true ? true : 
+                          action.showOnlyDeActive && active === false ? true :
+                            action.show ? true : false
+                        if (show) {
+                          return <TableCell padding='checkbox' key={i}>
+                            <Tooltip title={active === true ? action.labelActive : action.labelDeActive}>
+                              <IconButton onClick={() => this.handleClick(action.fn, n)}>
+                                <Icon style={{ fontSize: 16 }}>{active === true ? action.iconActive : action.iconDeActive}</Icon>
+                              </IconButton>
+                            </Tooltip>
+                          </TableCell>
+                        }
+                }) : ''}
+                      {columnData.map((e, i) => {
+                        let padding = 'none'
+                        if (!(actions && actions.length) && i === 0) {
+                          padding = 'default'
+                        } else {
+                          padding = e.disablePadding ? 'none' : 'default'
+                        }
                         const c = e.type && e.type === 'link' ? <a href={n[e.id]} target='_blank'>link</a> : n[e.id]
-                        return <TableCell padding='none' style={{ fontSize: 10 }}>{c}</TableCell>
+                        return <TableCell padding={padding} style={{ fontSize: 10 }}>{c}</TableCell>
                       })}
                     </TableRow>
                   );
                 })}
                 {emptyRows > 0 && (
                   <TableRow style={{ height: 49 * (dataFiltered.length === 0 ? emptyRows : 1) }}>
-                    <TableCell colSpan={6} />
+                    <TableCell colSpan={columnData.length + (actions && actions.length ? 1 : 0)} />
                   </TableRow>
                 )}
               </TableBody>
@@ -334,12 +357,16 @@ class ComponentTable extends React.Component {
 
 ComponentTable.propTypes = {
   classes: PropTypes.object.isRequired,
+  redirect: PropTypes.shape({
+    url: PropTypes.string,
+    path: PropTypes.string
+  }),
   data: PropTypes.array,
   title: PropTypes.string,
   prelabel: PropTypes.string,
   columnData: PropTypes.array,
+  actions: PropTypes.array.isRequired,
   getInitFn: PropTypes.func,
-  updateService: PropTypes.func,
 }
 
 export default withStyles(styles, { withTheme: true, name: 'ComponentTableAdmin' })(ComponentTable)

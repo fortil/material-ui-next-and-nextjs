@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { actionFrc, getFrc } from '../../../../lib/http'
+import { actionHttp, getHttp } from '../../../../lib/http'
 import { connect } from 'react-redux'
 import Form from '../form'
 import Table from '../table'
@@ -41,7 +41,7 @@ Create.propTypes = {
 
 
 const mapDispatchToPropsCreate = dispatch => ({
-  createFn: data => dispatch(actionFrc('fcr', 'create', data, 'json')),
+  createFn: data => dispatch(actionHttp('fcr', 'create', data, 'json')),
 })
 
 // const mapStateToProps = (state = { modal: INITIAL_STATE_MODAL }) => ({
@@ -67,9 +67,17 @@ class List extends React.Component {
       title='FCR'
       prelabel='FCR'
       actions={
-        []
+        [
+          {
+            fn: actionFrc,
+            show: true,
+            labelActive: 'Eliminar',
+            labelDeActive: 'Activar',
+            iconActive: 'delete_outline',
+            iconDeActive: 'publish'
+          }
+        ]
       }
-      updateService={actionFrc}
       columnData={columnData}
       getInitFn={getFrc}
       filterDate={['creationDate']}
@@ -80,8 +88,11 @@ class List extends React.Component {
 
 
 const mapDispatchToPropsList = dispatch => ({
-  getFrc: () => dispatch(getFrc('fcr')),
-  actionFrc: data => dispatch(actionFrc('fcr', 'update', data)),
+  getFrc: () => dispatch(getHttp('fcr', 'getall')),
+  actionFrc: (data, state) => {
+    data.active = !state.active
+    return dispatch(actionHttp('fcr', 'update', data))
+  },
 })
 const mapStateToPropsList = (state = { frc: INITIAL_STATE_FRC }) => ({ fcr: state.frc.data })
 
@@ -89,5 +100,10 @@ const list = connect(mapStateToPropsList, mapDispatchToPropsList)(List)
 
 export default {
   create,
-  list
+  list,
+  permissions: ['Atención Usuario'],
+  links: [
+    { icon: 'view_list', txt: 'FCR', primary: 'FCR', secondary: '', url: '/admin?page=fcr&view=list', as: '/admin/fcr' },
+    { icon: 'add_box', txt: 'Crear', primary: 'Crear FCR', secondary: '', url: '/admin?page=fcr&view=create', as: '/admin/fcr/create' }
+  ]
 }

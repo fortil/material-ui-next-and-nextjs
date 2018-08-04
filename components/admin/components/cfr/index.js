@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { actionFrc, getFrc } from '../../../../lib/http'
+import { actionHttp, getHttp } from '../../../../lib/http'
 import { connect } from 'react-redux'
 import Form from '../form'
 import Table from '../table'
@@ -35,7 +35,7 @@ Create.propTypes = {
 
 
 const mapDispatchToPropsCreate = dispatch => ({
-  createFn: data => dispatch(actionFrc('fcrmailshot', 'create', data, 'formData')),
+  createFn: data => dispatch(actionHttp('fcrmailshot', 'create', data, 'formData')),
 })
 
 // const mapStateToProps = (state = { modal: INITIAL_STATE_MODAL }) => ({
@@ -56,9 +56,17 @@ class List extends React.Component {
       title='Circulares de Firmas Registradas'
       prelabel='Circulares'
       actions={
-        []
+        [
+          {
+            fn: actionFrc,
+            show: true,
+            labelActive: 'Eliminar',
+            labelDeActive: 'Activar',
+            iconActive: 'delete_outline',
+            iconDeActive: 'publish'
+          }
+        ]
       }
-      updateService={actionFrc}
       columnData={columnData}
       getInitFn={getFrc}
       filterDate={['creationDate']}
@@ -69,8 +77,11 @@ class List extends React.Component {
 
 
 const mapDispatchToPropsList = dispatch => ({
-  getFrc: () => dispatch(getFrc('fcrmailshot')),
-  actionFrc: data => dispatch(actionFrc('fcrmailshot', 'update', data)),
+  getFrc: () => dispatch(getHttp('fcrmailshot', 'getall')),
+  actionFrc: (data, state) => {
+    data.active = !state.active
+    return dispatch(actionHttp('fcrmailshot', 'update', data))
+  },
 })
 const mapStateToPropsList = (state = { frcr: INITIAL_STATE_FRCR }) => ({ fcr: state.frcr.data })
 
@@ -78,5 +89,10 @@ const list = connect(mapStateToPropsList, mapDispatchToPropsList)(List)
 
 export default {
   create,
-  list
+  list,
+  permissions: ['Atención Usuario'],
+  links: [
+    { icon: 'view_list', txt: 'FCRC', primary: 'Circulares', secondary: '', url: '/admin?page=cfr&view=list', as: '/admin/circulares' },
+    { icon: 'add_box', txt: 'Crear', primary: 'Crear Circular', secondary: '', url: '/admin?page=cfr&view=create', as: '/admin/circular/create' }
+  ]
 }

@@ -16,6 +16,7 @@ import { connect } from 'react-redux'
 import Router from 'next/router'
 import { INITIAL_STATE_RTR } from '../../../../redux/reducers/rtr'
 import swal from 'sweetalert'
+import single from './single'
 
 const columnData = [
   { id: 'userCode', numeric: false, disablePadding: true, label: 'Código de usuario' },
@@ -371,4 +372,11 @@ const mapStateToProps = (state = { rtr: INITIAL_STATE_RTR }) => ({
 
 const component = withStyles(styles, { withTheme: true, name: 'RTRListAdmin' })(EnhancedTable)
 
-export default connect(mapStateToProps, mapDispatchToProps)(component)
+export default {
+  list: connect(mapStateToProps, mapDispatchToProps)(component),
+  single,
+  permissions: ['Atención Usuario'],
+  links: [
+    { icon: 'done', txt: 'RTR', primary: 'RTRs', secondary: '', url: '/admin?page=rtr&view=list', as: '/admin/rtr' }
+  ]
+}

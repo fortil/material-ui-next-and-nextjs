@@ -88,7 +88,7 @@ class Footer extends React.Component {
             ))
           }  
           <Grid item md={2} className={classes.mobileCss}>
-            <Grid container justify='center' direction='column' alignItems='start'>
+            <Grid container justify='center' direction='column' alignItems='flex-start'>
               <Grid item md={12} className={classes.textWhite}>
                 <h4 style={{}}><b>Enlaces de interés</b></h4>
               </Grid>
@@ -101,7 +101,7 @@ class Footer extends React.Component {
             </Grid>
           </Grid>
           <Grid item md={2} className={classes.mobileCss}>
-            <Grid container justify='center' direction='column' alignItems='start'>
+            <Grid container justify='center' direction='column' alignItems='flex-start'>
               <Grid item md={12} className={classes.textWhite}>
                 <h4 style={{}}><b>Síguenos</b></h4>
               </Grid>

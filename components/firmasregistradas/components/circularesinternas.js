@@ -1,6 +1,6 @@
 import React from 'react'
 import Table from './table'
-import { getFrc } from '../../../lib/http'
+import { getHttp } from '../../../lib/http'
 import { INITIAL_STATE_FRCR } from '../../../redux/reducers/frcr'
 import { connect } from 'react-redux'
 
@@ -23,7 +23,7 @@ class Firmas extends React.Component {
 
 
 const mapDispatchToProps = dispatch => ({
-  getFrc: active => dispatch(getFrc('fcrmailshot', active)),
+  getFrc: () => dispatch(getHttp('fcrmailshot', 'getallactive')),
 })
 const mapStateToProps = (state = { frcr: INITIAL_STATE_FRCR }) => ({
   frcr: state.frcr.data

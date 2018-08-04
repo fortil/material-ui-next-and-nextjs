@@ -8,6 +8,7 @@ import Card, { CardContent } from 'material-ui/Card'
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
 import { globalStyles, flex } from '../../../src/styles'
+import { getColumns } from '../../../lib/utils'
 import Grid from 'material-ui/Grid'
 import Router from 'next/router'
 import swal from 'sweetalert'
@@ -48,22 +49,45 @@ class FormAdmin extends React.Component {
   constructor(props) {
     super(props)
     this.state = Object.assign(
-      {},
+      { inputs: props.inputs },
       ...props.inputs.map(input => {
         return {
-          [input.name]: Object.assign({}, { value: '', error: false }, input)
+          [input.name]: Object.assign({}, { value: input.value || '', error: false }, input)
         }
       })
     )
   }
-
+  componentWillReceiveProps({ inputs }) {
+    if (inputs) {
+      this.setState({ inputs })
+    }
+  }
+  
   handleChange = prop => event => {
-    this.setState({ [prop]: Object.assign({}, this.state[prop], { value: event.target.value, error: false }) })
+    const value = event.target.value
+    let error = false
+    if (this.state[prop].hasOwnProperty('validate')) {
+      error = this.state[prop].validate.reduce((prev, validateFn) =>
+        !validateFn(value) || prev,
+        false)
+      console.log(this.state[prop], error)
+    }
+    this.setState({
+      [prop]: Object.assign({}, this.state[prop], { value, error })
+    })
   }
   createAction = () => {
-    const { inputs, redirect } = this.props
+    const { redirect } = this.props
+    const { inputs } = this.state
 
-    const inputsEmptys = inputs.filter(input => this.state[input.name].value !== 0 && !this.state[input.name].value)
+    const inputsEmptys = inputs.filter(input => {
+      const value = this.state[input.name].value
+      if (input.hasOwnProperty('validate')) {
+        return input.validate.reduce((prev, validateFn) => !validateFn(value) || prev, false)
+      } else {
+        return value !== 0 && !value
+      }
+    })
 
     if (inputsEmptys.length) {
       const inputsError = Object.assign(
@@ -94,7 +118,8 @@ class FormAdmin extends React.Component {
   }
 
   render() {
-    const { classes, inputs, title, botonlabel } = this.props
+    const { classes, title, botonlabel } = this.props
+    const inputs = this.state.inputs
 
     return (
       <div className={classes.root}>
@@ -102,9 +127,10 @@ class FormAdmin extends React.Component {
           <CardContent>
             <Typography className={classes.title} color='textSecondary'>{title}</Typography>
             <Grid container className={classes.container}>
-              {inputs.map(input => {
+              {inputs.map((input, _, array) => {
+                const md = getColumns(array.length)
                 if (input.type === 'file') {
-                  return <Grid item md={4} className={[classes.mt4, classes.flex, classes.justifyContentCenter].join(' ')}>
+                  return <Grid item md={md} className={[classes.mt4, classes.flex, classes.justifyContentCenter].join(' ')}>
                     <input
                       accept='application/msword, application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document'
                       style={{ display: 'none' }}
@@ -128,7 +154,7 @@ class FormAdmin extends React.Component {
                     </label>
                   </Grid>
                 } else if (input.type === 'select') {
-                  return <Grid item md={4} className={classes.mt3} style={{ display: 'flex', flexFlow: 'column wrap' }}>
+                  return <Grid item md={md} className={classes.mt3} style={{ display: 'flex', flexFlow: 'column wrap' }}>
                     <InputLabel htmlFor={input.name} style={{ fontSize: 13 }}>
                       {input.icon ? <Icon>{input.icon}</Icon> : ''}{input.label}
                     </InputLabel>
@@ -148,15 +174,16 @@ class FormAdmin extends React.Component {
                       margin='normal'
                       error={this.state[input.name].error}
                     >
-                      {input.choices.map(option => (
+                      <option value='' style={{ fontSize: 13 }}></option>
+                      {input.choices && input.choices.length ? input.choices.map(option => (
                         <option key={option.value} value={option.value} style={{ fontSize: 13 }}>
                           {option.label}
                         </option>
-                      ))}
+                      )) : ''}
                     </TextField>
                   </Grid>
                 } else {
-                  return <Grid item md={4} className={classes.mt3} style={{ display: 'flex', flexFlow: 'column wrap' }}>
+                  return <Grid item md={md} className={classes.mt3} style={{ display: 'flex', flexFlow: 'column wrap' }}>
                     <InputLabel style={{ fontSize: 13 }} htmlFor={input.name}><Icon>{input.icon}</Icon>{input.label}</InputLabel>
                     <Input
                       id={input.name}
@@ -188,6 +215,10 @@ FormAdmin.propTypes = {
   actions: PropTypes.object.isRequired,
   redirect: PropTypes.object.isRequired,
   inputs: PropTypes.array.isRequired
+}
+
+FormAdmin.defaultProps = {
+  inputs: []
 }
 
 

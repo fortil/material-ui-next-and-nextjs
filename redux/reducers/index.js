@@ -11,6 +11,7 @@ import { providers } from './providers'
 import { purchases } from './purchases'
 import { frc } from './frc'
 import { frcr } from './frcr'
+import { emails } from './emails'
 import { rtr } from './rtr'
 import { notifications } from './notifications'
 
@@ -27,6 +28,7 @@ export default combineReducers({
   purchases,
   frc,
   frcr,
+  emails,
   rtr,
   notifications,
 })

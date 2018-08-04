@@ -229,7 +229,7 @@ class EnhancedTable extends React.Component {
 
   handleClick = (action, user) => {
     if (action === 'edit') {
-      Router.push(`/admin?page=users&view=edit&params=${JSON.stringify({ id: user.id })}`, `/admin/users/edit/${user.id}`)
+      Router.push(`/admin?page=users&view=update&params=${JSON.stringify({ id: user.id })}`, `/admin/users/edit/${user.id}`)
     } else {
       swal({
         title: 'Seguro que desea realizar esta acción?',
@@ -287,7 +287,7 @@ class EnhancedTable extends React.Component {
   };
 
   isSelected = id => this.state.selected.indexOf(id) !== -1;
-  goTo = id => Router.push(`/admin?page=users&view=edit&params=${JSON.stringify({ id: id })}`, `/admin/users/edit/${id}`)
+  goTo = id => Router.push(`/admin?page=users&view=update&params=${JSON.stringify({ id: id })}`, `/admin/users/edit/${id}`)
     
   render() {
     const { classes } = this.props;

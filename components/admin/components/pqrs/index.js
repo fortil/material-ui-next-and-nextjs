@@ -16,6 +16,7 @@ import { connect } from 'react-redux'
 import { INITIAL_STATE_PQRS } from '../../../../redux/reducers/pqrs'
 import Router from 'next/router'
 import swal from 'sweetalert'
+import single from './single'
 
 const columnData = [
   { id: 'userCode', numeric: false, disablePadding: true, label: 'Código de usuario' },
@@ -389,4 +390,11 @@ const mapStateToProps = (state = { pqrs: INITIAL_STATE_PQRS }) => ({
 
 const component = withStyles(styles, { withTheme: true, name: 'PqrsListAdmin' })(EnhancedTable)
 
-export default connect(mapStateToProps, mapDispatchToProps)(component)
+export default {
+  list: connect(mapStateToProps, mapDispatchToProps)(component),
+  single,
+  permissions: ['Atención Usuario'],
+  links: [
+    { icon: 'inbox', txt: 'PQRs', primary: 'PQRs', secondary: '', url: '/admin?page=pqrs&view=list', as: '/admin/pqrs' }
+  ]
+}

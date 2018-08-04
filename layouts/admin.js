@@ -6,7 +6,8 @@ import Divider from 'material-ui/Divider'
 import List from 'material-ui/List'
 import PropTypes from 'prop-types'
 import Header from '../components/admin/commons/Head'
-import { FcrcMenuComponent, FrcMenuComponent, PQRsMenuComponent, NewsMenuComponent, UsersMenuComponent, ProvidersMenuComponent, PurchaseMenuComponent, RTRsMenuComponent, NotificationsMenuComponent } from '../components/admin/commons/Head/tilData'
+import getMenuComponent from '../components/admin/commons/Head/tilData'
+import Components from '../components/admin/components'
 import LOGO from '../static/logo.svg'
 import Router from 'next/router'
 
@@ -29,9 +30,6 @@ class AdminLayout extends React.Component {
     const { children, classes, query, user } = this.props
     const role = user.user.roles.join(',')
     const isAdmin = role.includes('Admin')
-    const isAtencion = role.includes('Atención Usuario') || isAdmin
-    const isCompras = role.includes('Compras') || isAdmin
-    const isPublicador = role.includes('Publicador') || isAdmin
     return (
       // <Provider store={store}>
       <div className={classes.root}>
@@ -48,24 +46,19 @@ class AdminLayout extends React.Component {
           <div className={classes.toolbar} onClick={() => Router.push('/admin')} style={{ backgroundColor: 'white' }}>
             <img src={LOGO} className={classes.image} />
           </div>
-          <Divider style={{ backgroundColor: '#a8a8a8', ...(!isAtencion ? { display: 'none' } : {}) }}/>
-          <List style={{ paddingTop: 0, paddingBottom: 0, ...(!isAtencion ? { display: 'none' } : {}) }}>{FcrcMenuComponent(query)}</List>
-          <Divider style={{ backgroundColor: '#a8a8a8', ...(!isAtencion ? { display: 'none' } : {}) }}/>
-          <List style={{ paddingTop: 0, paddingBottom: 0, ...(!isAtencion ? { display: 'none' } : {}) }}>{FrcMenuComponent(query)}</List>
-          <Divider style={{ backgroundColor: '#a8a8a8', ...(!isAtencion ? { display: 'none' } : {}) }}/>
-          <List style={{ paddingTop: 0, paddingBottom: 0, ...(!isAtencion ? { display: 'none' } : {}) }}>{PQRsMenuComponent(query)}</List>
-          <Divider style={{ backgroundColor: '#a8a8a8', ...(!isAtencion ? { display: 'none' } : {}) }}/>
-          <List style={{ paddingTop: 0, paddingBottom: 0,  ...(!isAtencion ? { display: 'none' } : {}) }}>{RTRsMenuComponent(query)}</List>
-          <Divider style={{ backgroundColor: '#a8a8a8', ...(!isAtencion ? { display: 'none' } : {}) }}/>
-          <List style={{ paddingTop: 0, paddingBottom: 0,  ...(!isAtencion ? { display: 'none' } : {}) }}>{NotificationsMenuComponent(query)}</List>
-          <Divider style={{ backgroundColor: '#a8a8a8', ...(!isPublicador ? { display: 'none' } : {}) }} />
-          <List style={{ paddingTop: 0, paddingBottom: 0,  ...(!isPublicador ? { display: 'none' } : {}) }}>{NewsMenuComponent(query)}</List>
-          <Divider style={{ backgroundColor: '#a8a8a8', ...(!isAdmin ? { display: 'none' } : {}) }} />
-          <List style={{ paddingTop: 0, paddingBottom: 0,  ...(!isAdmin ? { display: 'none' } : {}) }}>{UsersMenuComponent(query)}</List>
-          <Divider style={{ backgroundColor: '#a8a8a8', ...(!isCompras ? { display: 'none' } : {}) }} />
-          <List style={{ paddingTop: 0, paddingBottom: 0,  ...(!isCompras ? { display: 'none' } : {}) }}>{ProvidersMenuComponent(query)}</List>
-          <Divider style={{ backgroundColor: '#a8a8a8', ...(!isCompras ? { display: 'none' } : {}) }} />
-          <List style={{ paddingTop: 0, paddingBottom: 0,  ...(!isCompras ? { display: 'none' } : {}) }}>{PurchaseMenuComponent(query)}</List>
+          {
+            Object.keys(Components).map((key, i) => {
+              const hasPerms = isAdmin ? true : role.reduce(
+                (prev, curr) => Components[key].permissions.includes(curr) ? true : prev
+                , false)
+              return (
+                <div style={{ ...(!hasPerms ? { display: 'none' } : {}) }}>
+                  <Divider style={{ backgroundColor: '#a8a8a8' }} />
+                  <List style={{ paddingTop: 0, paddingBottom: 0 }}>{getMenuComponent(Components[key].links, query)}</List>
+                </div>
+              )
+            })
+          }
         </Drawer>
         <MuiThemeProvider theme={theme}>
           {children}
