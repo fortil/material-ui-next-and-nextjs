@@ -72,13 +72,10 @@ const STYLES = theme => ({
 })
 
 class Login extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      email: { val: 'admin', error: false },
-      pwd: { val: 'Surgas2018$', error: false }
-    }
-  }
+  state = {
+    email: { val: '', error: false },
+    pwd: { val: '', error: false }
+  }  
   
   handleChange = e => evt => {
     this.setState({ [e]: Object.assign({}, this.state[e], { val: evt.target.value }) })

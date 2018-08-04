@@ -38,10 +38,10 @@ class Politicas extends Component {
             files.map(file => {
               const name = file.name
               return <Grid item md={4}>
-                <a href={file.link} target="_blank"
+                <a href={file.link} target='_blank'
                   style={{ textDecoration: 'none', color: '#787878' }}
                 >
-                  <Grid container direction="column" alignItems="center">
+                  <Grid container direction='column' alignItems='center'>
                     <Grid item md={12}>
                       <FontAwesomeIcon icon={faFilePdf} size='3x' style={{}} />
                     </Grid>
