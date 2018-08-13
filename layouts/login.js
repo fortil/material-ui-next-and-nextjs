@@ -1,4 +1,5 @@
 import React from 'react'
+import { check } from '../lib/api'
 import { Provider } from 'react-redux'
 import Head from 'next/head'
 import withRoot from '../src/withRoot'
@@ -12,6 +13,15 @@ if (module.hot) {
 }
 
 class MainLayout extends React.Component {
+  state = {
+    allow: false
+  }
+  componentDidMount = () => {
+    check().then(ok => {
+      this.setState({ allow: !!ok })
+    })
+  }
+
   render() {
     const { children } = this.props
     return (
@@ -20,7 +30,7 @@ class MainLayout extends React.Component {
           <Head>
             <title>Login - SURGAS</title>
           </Head>
-          {children}
+          {this.state.allow ? children : ''}
         </div>
       </Provider>
     )

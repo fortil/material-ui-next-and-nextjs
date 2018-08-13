@@ -1,4 +1,5 @@
 import React from 'react'
+import { check } from '../lib/api'
 import withRoot from '../src/withRoot'
 import { withStyles, MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
@@ -24,12 +25,20 @@ const theme = createMuiTheme({
 class AdminLayout extends React.Component {
   state = {
     openDrawer: true,
+    allow: false
+  }
+
+  componentDidMount = () => {
+    check().then(ok => this.setState({ allow: !!ok })) 
   }
 
   render() {
     const { children, classes, query, user } = this.props
     const role = user.user.roles.join(',')
     const isAdmin = role.includes('Admin')
+    if (!this.state.allow) {
+      return (<div />)
+    }
     return (
       // <Provider store={store}>
       <div className={classes.root}>

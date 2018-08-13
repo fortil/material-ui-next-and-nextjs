@@ -10,6 +10,7 @@
     "export": "next export",
     "run": "next start",
     "clean": "rd /q /s .next &&  rd /q /s out",
+    "static": "npm run clean && npm run build && npm run export",
     "deploy": "npm run clean && npm run build && npm run export && firebase deploy"
   },
   "dependencies": {
