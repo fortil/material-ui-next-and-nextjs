@@ -51,7 +51,7 @@ const data = [
     icon: 'beenhere'
   },
   {
-    title: 'Ingrese Hoja de vida',
+    title: 'Trabaje con nosotros',
     path: 'ingresehojadevida',
     icon: 'insert_drive_file'
   },

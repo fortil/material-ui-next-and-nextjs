@@ -237,7 +237,7 @@ const inputs = [
   { ref: 'address', label: 'Dirección del predio', type: 'text', req: false },
   { ref: 'city', label: 'Ciudad', type: 'text', req: true },
   { ref: 'neighborhood', label: 'Barrio', type: 'text', req: true },
-  { ref: 'email', label: 'Email', type: 'email', req: false },
+  { ref: 'email', label: 'Email', type: 'email', req: true },
   { ref: 'phone', label: 'Teléfono', type: 'tel', req: true },
   { ref: 'issue', label: 'Asunto', type: 'text', req: true },
   {

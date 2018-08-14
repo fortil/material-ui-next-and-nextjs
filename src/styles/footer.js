@@ -1,9 +1,9 @@
-import image from '../../static/footer.png'
+// import image from '../../static/footer.png'
 
 export default {
   footer: {
     background: '#cf8100',
-    backgroundImage: `url(${image})`,
+    // backgroundImage: `url(${image})`,
     borderTop: '4px solid #cf8100',
     fontSize: '0.9em',
     // marginTop: 50,
