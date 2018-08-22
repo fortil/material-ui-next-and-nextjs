@@ -18,11 +18,11 @@ const styles = {
     },
     '& a': {
       textDecoration: 'none',
-      fontSize: 11,
+      fontSize: 12,
     },
     '& P': {
       textDecoration: 'none',
-      fontSize: 11,
+      fontSize: 12,
     },
   },
   textWhite: {
@@ -81,9 +81,9 @@ class Footer extends React.Component {
             data.map(dato => (
               <Grid item md={2} key={dato.cel} className={[classes.mobileCss, classes.margin].join(' ')}>
                 <h4 style={{ display: 'flex' }}><Icon className={[classes.textWhite, classes.icons].join(' ')}>room</Icon><b>{dato.city}</b></h4>
-                <p>{dato.dir}</p>
+                <p className='p2'>{dato.dir}</p>
                 {data.tel ? <p><b>Tel: </b>{dato.tel}</p> : null}
-                <p><b>Cel: </b>{dato.cel}</p>
+                <p className='p2'><b>Cel: </b>{dato.cel}</p>
               </Grid>
             ))
           }  

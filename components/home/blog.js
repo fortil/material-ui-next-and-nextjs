@@ -82,7 +82,7 @@ class BlogHome extends Component {
                         <h4>
                           <Link href={`/noticias?id=${show.id}`}><a className={textDark} style={{ textDecoration: 'none' }}>{show.title}</a></Link>
                         </h4>
-                        <Link href={`/noticias?id=${show.id}`}><p style={{ fontSize: 13 }}>{`${sanitizeHtml('abstract', show.description)}`}</p></Link>
+                        <Link href={`/noticias?id=${show.id}`}><p className={'p'}>{`${sanitizeHtml('abstract', show.description)}`}</p></Link>
                         <div className={postMeta}>
                           <Link href={`/noticias?id=${show.id}`}><a style={{ textDecoration: 'none' }}><span style={{ color: '#cf8100', fontSize: 12 }}><Icon style={{ fontSize: 14 }}>event_note</Icon> {show.creationDate.split(' ')[0]}</span></a></Link>
                         </div>

@@ -235,13 +235,13 @@ const inputs = [
   { ref: 'email', label: 'Email', type: 'email' },
   { ref: 'phone', label: 'Telefono', type: 'tel' },
   {
-    ref: 'profession', label: 'Profesión', type: '', select: true, val: 'vacio', enums: ['name', 'id'], items: [
-      { id: 'Contador Público', name: 'Contador Público' },
-      { id: 'Ingeniero de Petroleos', name: 'Ingeniero de Petroleos' },
-      { id: 'Ingeniero de Sistemas', name: 'Ingeniero de Sistemas' },
-      { id: 'Ingeniero Civil', name: 'Ingeniero Civil' },
-      { id: 'Administrador Financiero', name: 'Administrador Financiero' },
-      { id: 'Ingeniero Idustrial', name: 'Ingeniero Idustrial' }
+    ref: 'profession', label: 'Nivel educativo', type: '', select: true, val: 'vacio', enums: ['name', 'id'], items: [
+      { id: 'Bachiller', name: 'Bachiller' },
+      { id: 'Técnico', name: 'Técnico' },
+      { id: 'Técnolog', name: 'Técnolog' },
+      { id: 'Profesional', name: 'Profesional' },
+      { id: 'Especialista', name: 'Especialista' },
+      { id: 'Magister', name: 'Magister' }
     ]
   },
   {

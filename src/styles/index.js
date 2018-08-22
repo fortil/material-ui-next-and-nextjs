@@ -98,4 +98,7 @@ export const globalStyles = {
   textDark: {
     color: '#2e353e !important'
   },
+  '& p': {
+    fontSize: '14px important',
+  }
 }

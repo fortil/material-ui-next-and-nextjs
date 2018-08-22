@@ -40,11 +40,11 @@ class QuienesSomos extends Component {
       <article className={[seccion, m0, p0].join(' ')} ref={ref => this.hola = ref}>
         <Grid container className={container}>
           <Grid item xs={12} className={[classes.justifyText, classes.styleText].join(' ')}>
-            <p><b>Misión</b></p><p>Nuestro compromiso es satisfacer las necesidades y expectativas de usuarios y proveedores, mediante la comercialización y distribución de Gas Domiciliario en forma segura. Para ello contamos con talento humano eficiente, calificado y comprometido, sumado a la más avanzada tecnología y excelencia en el servicio, buscando crecimiento y rentabilidad de los accionistas, preservando el medio ambiente y generando bienestar a colaboradores, y a la comunidad.</p>
-            <p><b>Visión</b></p><p>Convertirnos en la organización líder en la comercialización y distribución de gas domiciliario en el sur de Colombia, con proyección internacional, mediante el desarrollo de servicios tradicionales e innovadores con los más altos estándares de calidad y productividad; así como el uso de tecnologías limpias que contribuyan al mejoramiento continuo logrando un adelanto sostenible que nos permita brindar bienestar a los grupos de interés social siendo nuestra mayor responsabilidad.</p>
-            <p><b>Estructura Organizacional</b></p>
+            <p><b className='p'>Misión</b></p><p className='p'>Nuestro compromiso es satisfacer las necesidades y expectativas de usuarios y proveedores, mediante la comercialización y distribución de Gas Domiciliario en forma segura. Para ello contamos con talento humano eficiente, calificado y comprometido, sumado a la más avanzada tecnología y excelencia en el servicio, buscando crecimiento y rentabilidad de los accionistas, preservando el medio ambiente y generando bienestar a colaboradores, y a la comunidad.</p>
+            <p><b className='p'>Visión</b></p><p className='p'>Convertirnos en la organización líder en la comercialización y distribución de gas domiciliario en el sur de Colombia, con proyección internacional, mediante el desarrollo de servicios tradicionales e innovadores con los más altos estándares de calidad y productividad; así como el uso de tecnologías limpias que contribuyan al mejoramiento continuo logrando un adelanto sostenible que nos permita brindar bienestar a los grupos de interés social siendo nuestra mayor responsabilidad.</p>
+            <p><b className='p'>Estructura Organizacional</b></p>
             <img src="../../static/nosotros.jpg" className={mb4} style={{ maxWidth: '100%', height: 'auto' }} alt="Surgas" />
-            <p><b>Himno de la compañía</b></p>
+            <p className='p'><b>Himno de la compañía</b></p>
             <YouTube
               videoId={'x669PDogaB0'} opts={{ height: this.state.h, width: this.state.w }}
               onReady={evt => evt.target.pauseVideo()}

@@ -33,7 +33,10 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
           />
-          <style>{`* {font-family: Roboto}, body {background-color: white !important}`}</style>
+          <style>{`
+          * {font-family: Roboto}
+          body {background-color: white !important}
+          .p {font-size: 14px !important}`}</style>
           {/* <script type="text/javascript">
             window.$zopim||(function(d,s){ z=$zopim=function(c) {
               z._.push(c)

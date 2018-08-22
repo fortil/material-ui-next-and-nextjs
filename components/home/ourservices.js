@@ -47,9 +47,9 @@ const STYLES = theme => ({
 })
 
 const data = [
-  { title: '¿Qué es el GAS natural?', text: 'Es una fuente de energía limpia de procedencia fósil, ...', img: 'icon1_01.png', link: '/nuestros-servicios#que-es-gas-natural' },
-  { title: 'Instalación de gas natural', text: 'Las instalaciones de gas natural están compuestas por un conjunto de tuberías..', img: 'icon1_02.png', link: '/nuestros-servicios#instalacion' },
-  { title: 'Gas Natural Comprimido', text: 'Más conocido por la sigla GNC, es esencialmente gas natural almacenado a altas presiones.', img: 'icon1_03.png', link: '/nuestros-servicios#que-es-gas-natural-comprimido' },
+  { title: 'Gas Natural Comprimido GNC', text: 'Más conocido por la sigla GNC, es esencialmente gas natural almacenado a altas presiones.', img: 'icon1_03.png', link: '/nuestros-servicios#que-es-gas-natural-comprimido' },
+  { title: 'Gas Licuado de Petroleo GLP', text: 'Es una fuente de energía limpia de procedencia fósil, ...', img: 'icon1_01.png', link: '/nuestros-servicios#que-es-gas-natural' },
+  { title: 'Nuestra Cobertura', text: 'Las instalaciones de gas natural están compuestas por un conjunto de tuberías..', img: 'icon1_02.png', link: '/nosotros#presencia' },
 ]
 
 class OurServiceHome extends Component {
@@ -73,8 +73,8 @@ class OurServiceHome extends Component {
                     </Grid>
                     <Grid item md={8} className={[classes.mobileCssTxt, classes.styleText].join(' ')}>
                       <h4 className={[m0, mb1].join(' ')}>{item.title}</h4>
-                      <p>{item.text}</p>
-                      <p className={classes.vermas}><Link href={item.link}><a style={{ textDecoration: 'none' }}><span>Ver más..</span></a></Link></p>
+                      <p className='p'>{item.text}</p>
+                      <p className={`${classes.vermas} p`}><Link href={item.link}><a style={{ textDecoration: 'none' }}><span>Ver más..</span></a></Link></p>
                     </Grid>
                   </Grid>
                 </Grid>
