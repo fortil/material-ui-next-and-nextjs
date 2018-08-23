@@ -5,7 +5,7 @@ import Toolbar from 'material-ui/Toolbar'
 import IconButton from 'material-ui/IconButton'
 import Icon from 'material-ui/Icon'
 import { primaryBG, globalStyles, header, flex } from '../../../src/styles'
-import LOGO from '../../../static/logo2.svg'
+// import LOGO from '../../../static/logo2.svg'
 
 const styles = theme => ({
   image: {
@@ -51,7 +51,7 @@ class HeadBar extends React.Component {
           <div className={classes.headerRow}>
             <div className={[classes.headerColumn, classes.justifyContentStart].join(' ')}>
               <div className={classes.headerRow}>
-                <img src={LOGO} className={classes.image} />
+                <img src={`../../../static/logo.png`} className={classes.image} />
               </div>
             </div>
             <div className={[classes.headerColumn, classes.butonsHead].join(' ')}>

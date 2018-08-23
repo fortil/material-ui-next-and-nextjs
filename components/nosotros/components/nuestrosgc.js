@@ -3,13 +3,43 @@ import { globalStyles, flex, nosotros, colors } from '../../../src/styles'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Grid from 'material-ui/Grid'
-const texto = `<p class='p'>El compromiso y la aprehensión de una cultura de calidad por parte de los funcionarios, ha logrado generar un mayor sentido de pertenencia y una mayor productividad debido a la minimización de errores que puedan generar reprocesos, esto contribuyendo de forma sistematica a un mejoramiento continuo que deja como evidencia la otorgación de un certificado de calidad ISO 9001 para la compaña desde el año 2007.</p>
+const texto = `<p class='p'>El compromiso y la aprehensión de una cultura de calidad por parte de los funcionarios, ha logrado
+generar un mayor sentido de pertenencia y una mayor productividad debido a la minimización de
+errores que puedan generar reprocesos, esto contribuyendo de forma sistemática a un
+mejoramiento continuo que deja como evidencia la otorgación de un certificado de calidad ISO
+9001 para la compaña desde el año 2015.</p>
+<p class='p'>Cuando hablamos en nuestra compañía de que contamos con Sistemas de Gestión certificados,
+transmitimos a todos nuestros grupos de interés, clientes, accionistas, gobierno, proveedores,
+colaboradores y comunidad en general, la imagen de una empresa confiable que trabaja con la
+más alta calidad del servicio, y con un enfoque de efectividad en todos sus procesos.</p>
+<p class='p'>Los Sistemas de Gestión, entre los requisitos para su implementación, contemplan la necesidad de
+disponer del personal competente, la adquisición, almacenamiento y uso de materiales amigables
+con el ambiente y con los colaboradores, el mantenimiento adecuado de la infraestructura, la
+estandarización de métodos de trabajo, el establecimiento de condiciones ambiéntales que
+favorezcan el producto y entorno, la utilización de instrumentos de medición adecuados, todos y
+cada uno de ellos orientados a la disminución de los riesgos asociados con las consecuentes
+ventajas del uso racional de los recursos.</p> 
+<p class='p'>La adopción y certificación de los Sistemas de Gestión surgen como una decisión estratégica de la
+compañía, motivada por intenciones de mejorar continuamente su desempeño y proyectarla como
+una empresa sostenible a largo plazo y como parte de su enfoque de responsabilidad social
+empresarial. Dentro de los principales beneficios que traen para nuestra empresa estas
+certificaciones podemos mencionar:.</p>
+<ul>
+<li type="line" class='p'>Ordenamiento de la estructura interna, que facilita la definición de objetivos, autoridades y
+responsabilidades, así como una comunicación más fluida, que facilita el logro de los
+objetivos.</li>
+<li type="line" class='p'>Incremento de la satisfacción de nuestros clientes, mediante procesos más efectivos que permitan el mejoramiento continuo.</li>
+<li type="line" class='p'>Reducción de costos, a partir de menores costos por reprocesos, reclamos de clientes, pérdidas de materiales y la minimización de los tiempos de ciclos de trabajo.</li>
+<li type="line" class='p'>Ambientes de trabajo seguro y saludable que previenen lesiones y enfermedades laborales.</li>
+<li type="line" class='p'>Prevención de la contaminación y la preservación del medio ambiente, mediante el control de los impactos negativos que puedan generar nuestra operación.</li>
+<li type="line" class='p'>Control adecuado de los riesgos que puedan afectar significativamente el negocio.</li>
+<li type="line" class='p'>Cumplimiento de los requisitos legales y otros aplicables.</li>
+</ul>
 
-<h3>Política Del Sistema Integrado De Gestión HSEQ </h3>
-<p class='p'><b>SURCOLOMBIANA DE GAS S.A. E.S.P.</b>, garantiza la construcción de instalaciones para asegurar la prestación del servicio público de gas natural, bajo condiciones de seguridad y confiabilidad. Satisfaciendo de manera oportuna las necesidades de nuestros clientes, cumpliendo con los requisitos legales y normativos del Sistema integrado HSEQ, comprometidos con la Calidad, Seguridad y Salud en el Trabajo, la protección del medio ambiente; previniendo los accidentes de trabajo, lesión a personas, enfermedades laborales, contaminación ambiental y daño a la propiedad, mediante la identificación y control de los peligros, valoración de los riesgos, aspectos e impactos, y análisis de vulnerabilidad en emergencias, dirigido a todos los trabajadores, incluyendo a los contratistas y partes interesadas.</p>
-<p class='p'><b>SURCOLOMBIANA DE GAS S.A. E.S.P</b> cuenta con la asignación de recursos financieros, técnicos, y el personal competente, que desarrolla procesos estandarizados y se encuentra comprometido con el mejoramiento continuo del sistema integrado de Gestión HSEQ.</p>
+<p class='p'>Por todo lo anterior, es importante para nuestra organización contar con estos Sistemas de Gestión que se constituyen en valiosas herramientas de apoyo para los responsables de los procesos, garantizándonos el logro efectivo de todos los objetivos trazados.</p>
 <h3>Mapa de Procesos </h3>
 <img src="../../../static/sgc/mapa.jpg" alt="mapa processos surgas" width="100%"/>
+
 <h3>Objetivos Estratégicos Del Sistema Integrado De Gestión de Calidad - (HSEQ)</h3>
 <ul>
 <li type="line" class='p'>Cumplir con la promesa básica de prestación del servicio en máximo 10 días calendario.</li>
@@ -34,9 +64,7 @@ const texto = `<p class='p'>El compromiso y la aprehensión de una cultura de ca
 <li type="line" class='p'><b>Respeto:</b> Interactuamos reconociendo los intereses colectivos, la diversidad individual, la sostenibilidad de los recursos naturales y la institucionalidad.</li>
 <li type="line" class='p'><b>Lealtad:</b> Nos debemos a nuestros usuarios, por ello trabajamos en la sensibilización y la orientación al servicio.</li>
 </ul>
-<h3>Construcción de acometidas e instalación de redes internas de gas domiciliario </h3>
-<p class='p'>Venta, diseño, construcción, inspección y puesta en servicio de instalaciones internas para suministro de gas natural a usuarios residenciales y comerciales.</p>
-<p class='p'>Venta y construcción de acometidas y centros de medición para suministro de gas natural.</p>`
+`
 
 const STYLES = theme => ({
   ...flex,
