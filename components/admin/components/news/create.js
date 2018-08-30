@@ -136,7 +136,7 @@ class CreateEntry extends React.Component {
                 style={{ fontSize: 14 }}
                 value={this.state.title}
                 onChange={this.handleChange('title')}
-                startAdornment={<InputAdornment position="start"></InputAdornment>}
+                startAdornment={<InputAdornment position="start">''</InputAdornment>}
               />
             </FormControl>
             <FormControl fullWidth className={classes.margin}>

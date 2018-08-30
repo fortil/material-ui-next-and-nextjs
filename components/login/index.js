@@ -135,7 +135,7 @@ class Login extends Component {
                         }}
                         placeholder={'Nombre de usuario'}
                         type={'text'}
-                        margin="normal"
+                        margin="none"
                         value={this.state.email.val}
                         onChange={this.handleChange('email')}
                       />
@@ -154,7 +154,7 @@ class Login extends Component {
                         }}
                         placeholder={'Contraseña'}
                         type={'password'}
-                        margin="normal"
+                        margin="none"
                         value={this.state.pwd.val}
                         onChange={this.handleChange('pwd')}
                       />

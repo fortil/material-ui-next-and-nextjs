@@ -61,7 +61,7 @@ class AdminLayout extends React.Component {
                 (prev, curr) => Components[key].permissions.includes(curr) ? true : prev
                 , false)
               return (
-                <div style={{ ...(!hasPerms ? { display: 'none' } : {}) }}>
+                <div key={i} style={{ ...(!hasPerms ? { display: 'none' } : {}) }}>
                   <Divider style={{ backgroundColor: '#a8a8a8' }} />
                   <List style={{ paddingTop: 0, paddingBottom: 0 }}>{getMenuComponent(Components[key].links, query)}</List>
                 </div>

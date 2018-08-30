@@ -148,7 +148,7 @@ class IngreseHojaDeVidaComponent extends Component {
                   label={input.label}
                   type={input.type}
                   style={{ fontSize: 13 }}
-                  margin="normal"
+                  margin="none"
                   InputLabelProps={propLabel}
                   error={this.state[input.ref].error}
                   value={this.state[input.ref].val}
@@ -170,7 +170,7 @@ class IngreseHojaDeVidaComponent extends Component {
                     },
                   }}
                   label={input.label}
-                  margin="normal"
+                  margin="none"
                 >
                   <MenuItem key="vacio" value="vacio" style={{ fontSize: 13 }}>
                     {''}

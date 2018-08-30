@@ -81,9 +81,9 @@ class HomeSlider extends Component {
           () => {
             setTimeout(() => {
               const el = document.querySelector('.control-arrow.control-next')
-              if (el.fireEvent) {
+              if (el && el.fireEvent) {
                 el.fireEvent('onclick')
-              } else {
+              } else if (el) {
                 const evObj = document.createEvent('Events')
                 evObj.initEvent('click', true, false)
                 el.dispatchEvent(evObj)

@@ -4,6 +4,9 @@ import { withStyles } from 'material-ui/styles'
 import Table, { TableBody, TableCell, TableHead, TablePagination, TableRow, TableSortLabel } from 'material-ui/Table'
 import Paper from 'material-ui/Paper'
 import Tooltip from 'material-ui/Tooltip'
+import { lighten } from 'material-ui/styles/colorManipulator'
+import Toolbar from 'material-ui/Toolbar'
+import SarchButton from '../../commons/searchButton'
 import { getPurchases } from '../../../lib/http'
 import { sortArray, sortArrayByDate } from '../../../lib/utils'
 import { connect } from 'react-redux'
@@ -12,11 +15,69 @@ import { INITIAL_STATE_PURCHASES } from '../../../redux/reducers/purchases'
 const columnData = [
   { id: 'email', numeric: false, disablePadding: true, label: 'Email' },
   { id: 'active', numeric: false, disablePadding: true, label: 'Estado' },
-  // { id: 'publicationDate', numeric: false, disablePadding: true, label: 'Publicación' },
   { id: 'expirationDate', numeric: false, disablePadding: true, label: 'Expiración' },
   { id: 'fileUrl', numeric: false, disablePadding: true, label: 'Archivo' },
   { id: 'object', numeric: false, disablePadding: true, label: 'Objeto' },
 ];
+
+const toolbarStyles = theme => ({
+  root: {
+    paddingRight: theme.spacing.unit,
+  },
+  highlight:
+    theme.palette.type === 'light'
+      ? {
+        color: theme.palette.secondary.main,
+        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+      }
+      : {
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.secondary.dark,
+      },
+  spacer: {
+    flex: '1 1 100%',
+  },
+  actions: {
+    color: theme.palette.text.secondary,
+    display: 'flex',
+  },
+  title: {
+    flex: '0 0 auto',
+    color: 'white'
+  },
+  bgOrange: {
+    backgroundColor: '#ee8600'
+  },
+  search: {
+    '& input': {
+      fontSize: '12px !important'
+    }
+  }
+});
+
+let EnhancedTableToolbar = props => {
+  const { lookingFor, cancelLookin, classes } = props;
+
+  return (
+    <Toolbar
+      className={[classes.root, classes.bgOrange].join(' ')}
+    >
+      <div className={classes.title}>
+      </div>
+      <div className={classes.spacer} />
+      <div className={classes.actions}>
+        <SarchButton className={classes.search} styleInput={{ fontSize: '12px !important' }} placeholder='Buscar' onChange={lookingFor} onCancelSearch={cancelLookin} />
+      </div>
+    </Toolbar>
+  );
+};
+
+EnhancedTableToolbar.propTypes = {
+  classes: PropTypes.object.isRequired,
+  lookingFor: PropTypes.func.isRequired,
+};
+
+EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar)
 
 class EnhancedTableHead extends React.Component {
   createSortHandler = property => event => {
@@ -64,7 +125,6 @@ class EnhancedTableHead extends React.Component {
 }
 
 EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
@@ -100,6 +160,7 @@ class EnhancedTable extends React.Component {
     active: true,
     order: 'desc',
     orderBy: 'userCode',
+    originData: [],
     selected: [],
     data: [],
     page: 0,
@@ -113,7 +174,8 @@ class EnhancedTable extends React.Component {
   componentWillReceiveProps({ purchase }) {
     if (purchase.length) {
       this.setState({
-        data: purchase.sort((a, b) => (a.id < b.id ? -1 : 1))
+        data: purchase.sort((a, b) => (a.id < b.id ? -1 : 1)),
+        originData: purchase
       })
     }
   }
@@ -143,6 +205,26 @@ class EnhancedTable extends React.Component {
     this.setState({ rowsPerPage: event.target.value });
   };
 
+  lookingFor = looking => {
+    if (this.state.originData.length) {
+      const forLooking = looking.toLowerCase()
+      const data = this.state.originData.filter(entry => {
+        for (let idx = 0; idx < columnData.length; idx++) {
+          const toLook = (entry[columnData[idx].id].toString()).toLowerCase()
+          if (toLook.includes(forLooking)) {
+            return true
+          }
+        }
+        return false
+      })
+      this.setState({ data })
+    }
+  };
+
+  cancelLookin = () => {
+    this.setState({ data: [...this.state.originData] })
+  };
+
   render() {
     const { classes } = this.props;
     const { data, order, orderBy, rowsPerPage, page } = this.state
@@ -158,6 +240,7 @@ class EnhancedTable extends React.Component {
 
     return (
       <Paper className={classes.root}>
+        <EnhancedTableToolbar lookingFor={this.lookingFor} cancelLookin={this.cancelLookin} />
         <div className={classes.tableWrapper}>
           <Table className={[classes.table, classes.td].join(' ')} aria-labelledby="tableTitle">
             <EnhancedTableHead
@@ -178,7 +261,6 @@ class EnhancedTable extends React.Component {
                   >
                     <TableCell padding='none' style={{ fontSize: 10, padding: '0px 0px 0px 5px'}}>{n.email}</TableCell>
                     <TableCell padding='none' style={{ fontSize: 10}}>{n.active ? 'Activo' : 'Inactivo'}</TableCell>
-                    {/* <TableCell padding='none' style={{ fontSize: 10}}>{n.publicationDate}</TableCell> */}
                     <TableCell padding='none' style={{ fontSize: 10}}>{n.expirationDate}</TableCell>
                     <TableCell padding='none' style={{ fontSize: 10}}><a href={n.fileUrl}>Enlace</a></TableCell>
                     <TableCell padding='none' style={{ fontSize: 10, minWidth: 250 }}>{n.object}</TableCell>

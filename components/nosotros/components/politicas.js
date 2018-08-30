@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import { globalStyles, flex, nosotros, colors } from '../../../src/styles'
+import { globalStyles, flex, colors } from '../../../src/styles'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Grid from 'material-ui/Grid'
-import Icon from 'material-ui/Icon'
-// import { Document, Page } from 'react-pdf/dist/entry.parcel'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faFilePdf } from '@fortawesome/fontawesome-free-solid'
 
@@ -62,31 +60,20 @@ class Politicas extends Component {
         <Grid container className={container}>
           {
             Object.keys(files).map((keyFile, i, array) => {
-              {/* console.log(keyFile, `https://surgas.blob.core.windows.net/pdfpoliticas/${keyFile}.pdf`) */}
               const name = decodeURIComponent(keyFile).replace(/^(.*\-\d+\s{0,100})/ig, '')
-              return <Grid item md={4}>
+              return <Grid key={i} item md={4}>
                 <a href={`https://surgas.blob.core.windows.net/pdfpoliticas/${keyFile}.pdf`} target="_blank"
                   style={{ textDecoration: 'none', color: '#787878' }}
                 >
                   <Grid container direction="column" alignItems="center">
                     <Grid item md={12}>
                       <FontAwesomeIcon icon={faFilePdf} size='3x' style={{  }} />
-                      {/* <Icon style={{ fontSize: 36 }}>insert_drive_file</Icon> */}
                     </Grid>
                     <Grid item md={12} style={{ marginBottom: 25, textAlign: 'center' }}>
                       <span style={{ fontSize: 12, color: 'black' }}>{name.trim()}</span>
                     </Grid>
                   </Grid>
                 </a>
-              {/* return <div key={keyFile}>
-                <Document
-                  file={`https://surgas.blob.core.windows.net/pdfpoliticas/${keyFile}.pdf`}
-                  onLoadSuccess={this.onDocumentLoad(keyFile)}
-                >
-                  <Page pageNumber={this.state[keyFile].pageNumber} />
-                </Document>
-                <p>Página {this.state[keyFile].pageNumber} de {this.state[keyFile].numPages}</p>
-              </div> */}
               </Grid>
             })
           }

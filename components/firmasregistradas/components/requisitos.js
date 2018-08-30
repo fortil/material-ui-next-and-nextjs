@@ -27,10 +27,6 @@ class Historia extends Component {
       <article className={[seccion, m0, p0].join(' ')}>
         <Grid container className={container}>
           <Grid item xs={12} className={[classes.justifyText, classes.styleText].join(' ')}>
-            {/* <img src="../../static/historia.jpg" className={mb4} style={{ maxWidth: '100%', height: 'auto' }} alt="" /> */}
-            {/* <h3 className={[h3, textCenter, title].join(' ')}><strong>Una empresa para beneficio de todos</strong></h3> */}
-                {/* <p>&nbsp;</p>
-                <p align="justify"><strong>&nbsp;</strong></p> */}
                 <p align="justify"><strong>1. Requisitos para inscripción en el registro de constructores de instalaciones internas de gas natural en edificaciones residenciales y comerciales</strong></p>
                 <p>&nbsp;</p>
                 <p align="justify"><strong>1.1.</strong> La firma constructora y reparadora, debe presentar ante la empresa, la solicitud por escrito, dirigida a SURCOLOMBIANA DE GAS S.A. E.S.P., en donde Solicite la inscripción en el Registro de constructores de Instalaciones Internas de gas natural, junto con los documentos que allí se relacionan, indicando nombre de la persona para la cual se solicita el registro (natural o jurídica), documento de identidad, domicilio y las ciudades donde desarrollara las actividades. La FCR debe Indicar en la solicitud, la dirección de Notificaciones y la dirección de las oficinas ubicadas en las ciudades donde desarrolla sus actividades, en las cuales los usuarios pueden presentar cualquier tipo de petición.</p>

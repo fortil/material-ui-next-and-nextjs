@@ -74,7 +74,7 @@ class ProveedoresTableHead extends React.Component {
 }
 
 ProveedoresTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
+  numSelected: PropTypes.number,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
@@ -139,7 +139,7 @@ let ProveedoresTableToolbar = props => {
 
 ProveedoresTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
-  resetSelected: PropTypes.func.isRequired,
+  resetSelected: PropTypes.func,
 };
 
 const ProveedorestchEnhancedTableToolbar = dispatch => ({

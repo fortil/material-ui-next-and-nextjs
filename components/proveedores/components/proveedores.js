@@ -196,9 +196,9 @@ class ProveedoresForm extends Component {
             <h4 className={[classes.h4, classes.textCenter].join(' ')}><strong>Información básica</strong></h4>
           </Grid>  
           {
-            inputs.map(input => {
+            inputs.map((input, i) => {
               return (
-                <Grid item md={6} key={input.ref} className={classes.mobileCss}>
+                <Grid key={i} item md={6} key={input.ref} className={classes.mobileCss}>
                   <TextField
                     InputProps={{
                       disableUnderline: true,
@@ -212,7 +212,6 @@ class ProveedoresForm extends Component {
                     label={input.label}
                     type={input.type}
                     required
-                    // margin="normal"
                     value={this.state[input.ref].val}
                     error={this.state[input.ref].error}
                     onChange={this.handleChange(input.ref)}
@@ -225,19 +224,19 @@ class ProveedoresForm extends Component {
             <h4 className={[classes.h4, classes.textCenter].join(' ')}><strong>¿Qué tipo de servicio o producto suministra?</strong></h4>
           </Grid>
           {
-            this.props.services.map(e => {
+            this.props.services.map((e, i) => {
               if (e.active) {
                 return (
-                  <Card className={[classes.card, classes.mobileCss].join(' ')}>
+                  <Card key={i} className={[classes.card, classes.mobileCss].join(' ')}>
                     <CardContent>
                       <Grid container className={[container, classes.mobileCss].join(' ')}>
                         <Grid item md={12} className={classes.mobileCss}>
                           <h5 className={[classes.h5, classes.textCenter].join(' ')}><strong>{e.description}</strong></h5>
                         </Grid>
                         {
-                          e.services.map(i => {
+                          e.services.map((i, _i) => {
                             if (i.active) {
-                              return <Grid item md={4} style={{ margin: '5px 0' }} className={classes.mobileCss}>
+                              return <Grid key={_i} item md={4} style={{ margin: '5px 0' }} className={classes.mobileCss}>
                                 <label style={{ fontSize: 13 }}><input type="checkbox" id={`${i.id}`} name={`${i.id}`} onChange={this.handleCheck(i.id)}/> {i.description}</label>
                               </Grid>
                             } else {
@@ -255,8 +254,8 @@ class ProveedoresForm extends Component {
             })
           }
           {
-            ['rutFile', 'ccioFile', 'briefcaseFile'].map(inp => (
-              <Grid item md={6} className={classes.mobileCss}>
+            ['rutFile', 'ccioFile', 'briefcaseFile'].map((inp, i) => (
+              <Grid  key={i} item md={6} className={classes.mobileCss}>
                 <input
                   accept="application/msword, application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                   className={classes.input}

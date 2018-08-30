@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Table, { TableBody, TableCell, TableHead, TablePagination, TableRow, TableSortLabel } from 'material-ui/Table'
+import { lighten } from 'material-ui/styles/colorManipulator'
+import Toolbar from 'material-ui/Toolbar'
+import SarchButton from '../commons/searchButton'
 import Paper from 'material-ui/Paper'
 import Tooltip from 'material-ui/Tooltip'
 import { getAllService } from '../../lib/http'
@@ -16,6 +19,65 @@ const columnData = [
   { id: 'issuedPerson', numeric: false, disablePadding: true, label: 'Expidió' },
   { id: 'fileUrl', numeric: false, disablePadding: true, label: 'Archivo' },
 ];
+
+const toolbarStyles = theme => ({
+  root: {
+    paddingRight: theme.spacing.unit,
+  },
+  highlight:
+    theme.palette.type === 'light'
+      ? {
+        color: theme.palette.secondary.main,
+        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+      }
+      : {
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.secondary.dark,
+      },
+  spacer: {
+    flex: '1 1 100%',
+  },
+  actions: {
+    color: theme.palette.text.secondary,
+    display: 'flex',
+  },
+  title: {
+    flex: '0 0 auto',
+    color: 'white'
+  },
+  bgOrange: {
+    backgroundColor: '#ee8600'
+  },
+  search: {
+    '& input': {
+      fontSize: '12px !important'
+    }
+  }
+});
+
+let EnhancedTableToolbar = props => {
+  const { lookingFor, cancelLookin, classes } = props;
+
+  return (
+    <Toolbar
+      className={[classes.root, classes.bgOrange].join(' ')}
+    >
+      <div className={classes.title}>
+      </div>
+      <div className={classes.spacer} />
+      <div className={classes.actions}>
+        <SarchButton className={classes.search} styleInput={{ fontSize: '12px !important' }} placeholder='Buscar' onChange={lookingFor} onCancelSearch={cancelLookin} />
+      </div>
+    </Toolbar>
+  );
+};
+
+EnhancedTableToolbar.propTypes = {
+  classes: PropTypes.object.isRequired,
+  lookingFor: PropTypes.func.isRequired,
+};
+
+EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar)
 
 class EnhancedTableHead extends React.Component {
   createSortHandler = property => event => {
@@ -61,9 +123,7 @@ class EnhancedTableHead extends React.Component {
 }
 
 EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
@@ -89,18 +149,15 @@ const styles = theme => ({
 EnhancedTableHead = withStyles(styles, {withTheme: true, name: 'EnhancedTableHeadAdmin' })(EnhancedTableHead)
 
 class EnhancedTable extends React.Component {
-  constructor(props, context) {
-    super(props, context)
-
-    this.state = {
-      active: true,
-      order: 'asc',
-      orderBy: 'email',
-      selected: [],
-      data: [],
-      page: 0,
-      rowsPerPage: 5,
-    };
+  state = {
+    active: true,
+    order: 'asc',
+    orderBy: 'email',
+    selected: [],
+    data: [],
+    originData: [],
+    page: 0,
+    rowsPerPage: 5,
   }
 
   componentWillMount() {
@@ -110,7 +167,8 @@ class EnhancedTable extends React.Component {
   componentWillReceiveProps({ notifications }) {
     if (notifications && notifications.length) {
       this.setState({
-        data: notifications.filter(a => a.active === true).sort((a, b) => (new Date(b.actDate)) - (new Date(a.actDate)))
+        data: notifications.filter(a => a.active === true).sort((a, b) => (new Date(b.actDate)) - (new Date(a.actDate))),
+        originData: notifications
       })
     }
   }
@@ -140,18 +198,38 @@ class EnhancedTable extends React.Component {
     this.setState({ rowsPerPage: event.target.value });
   };
 
+  lookingFor = looking => {
+    if (this.state.originData.length) {
+      const forLooking = looking.toLowerCase()
+      const data = this.state.originData.filter(entry => {
+        for (let idx = 0; idx < columnData.length; idx++) {
+          const toLook = entry[columnData[idx].id].toLowerCase()
+          if (toLook.includes(forLooking)) {
+            return true
+          }
+        }
+        return false
+      })
+      this.setState({ data })
+    }
+  }
+
+  cancelLookin = () => {
+    this.setState({ data: [...this.state.originData] })
+  }
+
   render() {
     const { classes } = this.props;
-    const { data, order, orderBy, selected, rowsPerPage, page } = this.state
+    const { data, order, orderBy, rowsPerPage, page } = this.state
     const dataFiltered = data.filter(e => e.active === this.state.active)
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, dataFiltered.length - page * rowsPerPage);
 
     return (
       <Paper className={classes.root}>
+        <EnhancedTableToolbar lookingFor={this.lookingFor} cancelLookin={this.cancelLookin} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
-              numSelected={selected.length}
               order={order}
               orderBy={orderBy}
               onRequestSort={this.handleRequestSort}

@@ -55,10 +55,10 @@ class EnhancedTableHead extends React.Component {
               </TableSortLabel>  
             </Tooltip>  
           </TableCell>
-          {columnData.map(column => {
+          {columnData.map((column, i) => {
             return (
               <TableCell
-                key={column.id}
+                key={i}
                 variant={'head'}
                 padding={'dense'}
                 sortDirection={orderBy === column.id ? order : false}
@@ -317,10 +317,11 @@ class EnhancedTable extends React.Component {
                 rowCount={dataFiltered.length}
               />
               <TableBody>
-                {dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
+                {dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((n, i) => {
                   const isSelected = this.isSelected(n.id);
                   return (
                     <TableRow
+                      key={i}
                       hover
                       role="checkbox"
                       aria-checked={isSelected}
@@ -340,7 +341,7 @@ class EnhancedTable extends React.Component {
                       <TableCell padding="none" style={{ cursor: 'pointer', fontSize: 12 }} onClick={() => this.goingToSingle(n.id)}>{n.issue}</TableCell>
                       <TableCell padding="none" style={{ cursor: 'pointer', fontSize: 12, maxWidth: 300 }} onClick={() => this.goingToSingle(n.id)}>{n.description}</TableCell>
                       <TableCell padding="none" style={{ cursor: 'pointer', fontSize: 12 }} onClick={() => this.goingToSingle(n.id)}>{
-                        n.annexes.length ? n.annexes.map((e, i) => <span><a href={e.url}>Archivo {i + 1}</a>, </span>) : '- 0 -'
+                        n.annexes.length ? n.annexes.map((e, i) => <span key={i}><a href={e.url}>Archivo {i + 1}</a>, </span>) : '- 0 -'
                       }</TableCell>
                     </TableRow>
                   );

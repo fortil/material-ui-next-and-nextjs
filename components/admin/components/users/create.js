@@ -149,7 +149,7 @@ class CreateUsers extends React.Component {
                     },
                   }}
                   // helperText="Please select your currency"
-                  margin="normal"
+                  margin="none"
                 >
                   {[
                     { label: '', value: '' }, 

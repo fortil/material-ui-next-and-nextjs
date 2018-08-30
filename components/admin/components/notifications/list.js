@@ -76,7 +76,6 @@ class EnhancedTableHead extends React.Component {
 EnhancedTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
@@ -141,9 +140,6 @@ EnhancedTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
   numSelected: PropTypes.number.isRequired,
   selected: PropTypes.array.isRequired,
-  removeUser: PropTypes.func.isRequired,
-  resetPwd: PropTypes.func.isRequired,
-  activateUser: PropTypes.func.isRequired,
   resetSelected: PropTypes.func.isRequired,
 };
 

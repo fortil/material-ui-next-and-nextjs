@@ -55,7 +55,6 @@ class EnhancedTableHead extends React.Component {
 }
 
 EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
@@ -128,7 +127,7 @@ let EnhancedTableToolbar = props => {
 
   return (
     <Toolbar
-      className={[classes.root, classes.bgOrange]}
+      className={[classes.root, classes.bgOrange].join(' ')}
     >
       <div className={classes.title}>
       </div>

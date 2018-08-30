@@ -133,10 +133,10 @@ class FormAdmin extends React.Component {
           <CardContent>
             <Typography className={classes.title} color='textSecondary'>{title}</Typography>
             <Grid container className={classes.container}>
-              {inputs.map((input, _, array) => {
+              {inputs.map((input, i, array) => {
                 const md = getColumns(array.length)
                 if (input.type === 'file') {
-                  return <Grid item md={md} className={[classes.mt4, classes.flex, classes.justifyContentCenter].join(' ')}>
+                  return <Grid key={i} item md={md} className={[classes.mt4, classes.flex, classes.justifyContentCenter].join(' ')}>
                     <input
                       accept='application/msword, application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document'
                       style={{ display: 'none' }}
@@ -160,7 +160,7 @@ class FormAdmin extends React.Component {
                     </label>
                   </Grid>
                 } else if (input.type === 'select') {
-                  return <Grid item md={md} className={classes.mt3} style={{ display: 'flex', flexFlow: 'column wrap' }}>
+                  return <Grid key={i} item md={md} className={classes.mt3} style={{ display: 'flex', flexFlow: 'column wrap' }}>
                     <InputLabel htmlFor={input.name} style={{ fontSize: 13 }}>
                       {input.icon ? <Icon>{input.icon}</Icon> : ''}{input.label}
                     </InputLabel>
@@ -177,19 +177,19 @@ class FormAdmin extends React.Component {
                           className: classes.menu,
                         },
                       }}
-                      margin='normal'
+                      margin='none'
                       error={this.state[input.name].error}
                     >
                       <option value='' style={{ fontSize: 13 }}></option>
-                      {input.choices && input.choices.length ? input.choices.map(option => (
-                        <option key={option.value} value={option.value} style={{ fontSize: 13 }}>
+                      {input.choices && input.choices.length ? input.choices.map((option, i) => (
+                        <option key={i} value={option.value} style={{ fontSize: 13 }}>
                           {option.label}
                         </option>
                       )) : ''}
                     </TextField>
                   </Grid>
                 } else {
-                  return <Grid item md={md} className={classes.mt3} style={{ display: 'flex', flexFlow: 'column wrap' }}>
+                  return <Grid key={i} item md={md} className={classes.mt3} style={{ display: 'flex', flexFlow: 'column wrap' }}>
                     <InputLabel style={{ fontSize: 13 }} htmlFor={input.name}><Icon>{input.icon}</Icon>{input.label}</InputLabel>
                     <Input
                       id={input.name}

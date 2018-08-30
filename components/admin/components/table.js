@@ -69,7 +69,7 @@ class ComponentTableHead extends React.Component {
 }
 
 ComponentTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
+  numSelected: PropTypes.number,
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
@@ -135,7 +135,7 @@ let ComponentTableToolbar = props => {
 
 ComponentTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
-  resetSelected: PropTypes.func.isRequired,
+  resetSelected: PropTypes.func,
   switchActive: PropTypes.bool.isRequired,
 };
 
@@ -325,7 +325,7 @@ class ComponentTable extends React.Component {
                           padding = e.disablePadding ? 'none' : 'default'
                         }
                         const c = e.type && e.type === 'link' ? <a href={n[e.id]} target='_blank'>link</a> : n[e.id]
-                        return <TableCell padding={padding} style={{ fontSize: 10 }}>{c}</TableCell>
+                        return <TableCell key={i} padding={padding} style={{ fontSize: 10 }}>{c}</TableCell>
                       })}
                     </TableRow>
                   );

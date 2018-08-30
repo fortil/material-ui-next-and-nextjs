@@ -132,7 +132,7 @@ class RTR extends Component {
                       multiline={input.ref === 'description' ? true : false}
                       label={input.label}
                       required={input.req}
-                      margin="normal"
+                      margin="none"
                       value={this.state[input.ref].val}
                       error={this.state[input.ref].error}
                       onChange={this.handleChange(input.ref)}

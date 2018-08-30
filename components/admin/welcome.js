@@ -3,10 +3,6 @@ import React, { Component } from 'react'
 import { globalStyles, flex, nosotros, colors } from '../../src/styles'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
-import Grid from 'material-ui/Grid'
-import Icon from 'material-ui/Icon'
-import Link from 'next/link'
-import Typography from 'material-ui/Typography'
 
 const STYLES = theme => ({
   ...flex,

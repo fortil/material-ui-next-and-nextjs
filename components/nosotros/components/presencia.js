@@ -49,8 +49,8 @@ const Presencia = compose(
         enableRetinaIcons
         gridSize={60}
       >
-        {data.map(item => <Marker
-          key={item.cel}  
+        {data.map((item, i) => <Marker
+          key={i}
           position={{ lat: item.lat, lng: item.lng }}
           onClick={() => props.onToggleOpen(item)}
         >

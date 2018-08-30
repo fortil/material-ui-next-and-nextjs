@@ -40,10 +40,10 @@ class EnhancedTableHead extends React.Component {
               Acciones
             </TableSortLabel>
           </TableCell>
-          {columnData.map(column => {
+          {columnData.map((column, i) => {
             return (
               <TableCell
-                key={column.id}
+                key={i}
                 style={{ maxWidth: column.id === 'id' ? 20 : 'unset' }}
                 numeric={column.numeric}
                 padding={column.disablePadding ? 'none' : 'default'}
@@ -370,7 +370,7 @@ class NewsAdminTable extends React.Component {
                 rowCount={dataFiltered.length}
               />
               <TableBody>
-                {dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
+                {dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((n, i) => {
                   const isSelected = this.isSelected(n.id);
                   return (
                     <TableRow
@@ -378,7 +378,7 @@ class NewsAdminTable extends React.Component {
                       role="checkbox"
                       aria-checked={isSelected}
                       tabIndex={-1}
-                      key={n.id}
+                      key={i}
                       selected={isSelected}
                     >
                       <TableCell padding="checkbox">
