@@ -8,7 +8,7 @@ class Nosotros extends Component {
     return (
       <Layout title="NOSOTROS" page="Nosotros">
         <GrantImage />  
-        <NosotrosComponent />
+        <NosotrosComponent url={this.props.url}/>
       </Layout>
     )
   }

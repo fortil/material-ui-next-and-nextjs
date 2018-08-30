@@ -375,7 +375,7 @@ const component = withStyles(styles, { withTheme: true, name: 'RTRListAdmin' })(
 export default {
   list: connect(mapStateToProps, mapDispatchToProps)(component),
   single,
-  permissions: ['Atención Usuario'],
+  permissions: ['RTR'],
   links: [
     { icon: 'done', txt: 'RTR', primary: 'RTRs', secondary: '', url: '/admin?page=rtr&view=list', as: '/admin/rtr' }
   ]

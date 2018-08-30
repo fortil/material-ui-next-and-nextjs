@@ -97,14 +97,25 @@ class NuestrosServicios extends Component {
         <article id="que-es-gas-natural-comprimido" className={[seccion, m0, p0].join(' ')}>
           <Grid container className={[container, classes.contenedor].join(' ')}>
             <Grid item xs={12} className={classes.justifyText} style={{ marginTop: 20, fontSize: 14 }}>
-              <h3 className={[h3, textCenter, title].join(' ')}><strong>¿QUÉ ES EL GAS NATURAL COMPRIMIDO?</strong></h3>
-              <p>Más conocido por la sigla GNC, es esencialmente gas natural almacenado a altas presiones. Es un combustible para uso vehicular y residencial, utilizado en este último caso, en aquellos lugares donde la demanda a atender es pequeña y la distancia de transporte es larga.</p>
-
+              <h3 className={[h3, textCenter, title].join(' ')}><strong>¿QUÉ ES EL GAS NATURAL COMPRIMIDO GNC?</strong></h3>
+              <p>Es un combustible de origen fósil que se extrae del subsuelo, compuesto por hidrocarburos gaseosos, su principal componente es el metano en una proporción  entre el 70% y el 90% aproximadamente.</p>
+              <div className={textCenter} style={{ maxWidth: '100%', height: 'auto' }}><img src="../../static/gas/graphic.png" className={mb4} style={{ maxWidth: '100%', height: 'auto' }} alt="Grafico GNC" /></div>
+              <p>El gas natural se encuentra en la naturaleza en “bolsas de gas” bajo tierra, cubiertas por capas impermeables (roca sello) que impiden su salida al exterior; se puede encontrar acompañado al crudo en pozos petrolíferos (gas natural asociado) o en yacimientos exclusivos de gas natural (gas natural no asociado).</p>
+              <p>Es esencialmente gas natural almacenado a altas presiones. Es un combustible para uso vehicular y residencial, utilizado en este último caso, en aquellos lugares donde la demanda a atender es pequeña y la distancia de transporte es larga.</p>
               <p>El GNC requiere las siguientes etapas:</p>
               <ol>
                 <li><b>La compresión:</b> se toma el gas natural del campo de producción, de un gasoducto de transporte o de una red de distribución y mediante compresores se aumenta la presión del gas que se deposita en cilindros o tanques diseñados para el caso. La presión máxima utilizada para el gas comprimido es de 3600 psi.</li>
                 <li><b>El transporte y almacenamiento:</b> los cilindros o tanques se transportan en vehícolos por carretera o vía fluvial.</li>
                 <li><b>La descompresión:</b> utilizando válvulas para expandir el gas se reduce la presión y se inyecta el gas a las redes de distribución para llevarlo a los usuarios finales. </li>
+              </ol>
+              <h4>PROPIEDADES:</h4>
+              <ol>
+                <li>El gas natural es menos denso que el aire, insípido, incoloro, sin olor.</li>
+                <li>El odorizante utilizado para el GN es el Tetrahidrotiofeno THT.</li>
+                <li>No es corrosivo ni toxico, posee un estrecho intervalo de inflamabilidad, lo que hace del un combustible seguro en comparación con otras fuentes de energía.</li>
+                <li>El poder calorífico del gas natural es de 8278kcal/m3.</li>
+                <li>Su peso (densidad relativa) es de 0.67 con respecto al aire (1.0).</li>
+                <li>Pertenece a la segunda familia de gases, cuyo índice de Wobbe está comprendido entre 9680 y 13850 Kcal/m3.</li>
               </ol>
               <h4>BENEFICIOS DEL GAS NATURAL:</h4>
               <h4>Seguridad.</h4>
@@ -117,6 +128,25 @@ class NuestrosServicios extends Component {
               <p>El gas natural llega por tubería directamente a los hogares, al comercio y a la industria. No tiene que cargar ni recargar incómodos y pesados cilindros. Podrá cocinar, hornear, secar la ropa, además de disfrutar del agua caliente, la calefacción, la chimenea y muchas aplicaciones más.</p>
               <h4>Servicio.</h4>
               <p>Surcolombiana de Gas S. A. ESP atenderá con gusto sus solicitudes e inquietudes. Personal especializado le garantizará un mejor servicio.</p>
+            </Grid>
+          </Grid>
+        </article>
+        <article id="que-es-gas-licuado-petroleo" className={[seccion, m0, p0].join(' ')}>
+          <Grid container className={[container, classes.contenedor].join(' ')}>
+            <Grid item xs={12} className={classes.justifyText} style={{ marginTop: 20, fontSize: 14 }}>
+              <h3 className={[h3, textCenter, title].join(' ')}><strong>¿QUÉ ES EL GAS LICUADO PETROLEO GLP?</strong></h3>
+              <p>Es una mezcla de hidrocarburos extraídos del procesamiento del gas natural o del petróleo, gaseosos en condiciones atmosféricas, que se licuan fácilmente por enfriamiento o compresión. El GLP está constituido principalmente por propano y butano.</p>
+              <div className={textCenter} style={{ maxWidth: '100%', height: 'auto' }}><img src="../../static/gas/molecula.png" className={mb4} style={{ maxWidth: '100%', height: 'auto' }} alt="Molécula de metano" /></div>
+              <p>El Gas Licuado tiene dos orígenes: el 60% de la producción se obtiene durante la extracción de gas natural y petróleo del suelo. El 40% restante se produce durante el proceso de refino del crudo del petróleo.</p>
+              <p>Es esencialmente gas natural almacenado a altas presiones. Es un combustible para uso vehicular y residencial, utilizado en este último caso, en aquellos lugares donde la demanda a atender es pequeña y la distancia de transporte es larga.</p>
+              <p>El GLP es, por naturaleza, un producto secundario, que de no ser aprovechado como fuente energética, continuaría siendo un producto indeseable. En el pasado, el Gas Licuado se destruía por venteo o quema en antorcha, por lo que se desperdiciaba el enorme potencial de esta extraordinaria fuente energética.</p>
+              <p>Aunque el Gas Licuado está asociado a la producción de gas natural y crudo de petróleo, es una de las energías con mayor potencial calorífico, pudiendo desempeñar prácticamente cualquiera de las funciones de los combustibles primarios de los que se deriva, además cuenta con amplias ventajas medioambientales y económicas respecto a la mayor parte de las energías tradicionales.</p>
+              <p>El GLP suministra calor y energía tanto en áreas remotas como en zonas urbanas densamente pobladas. Es fácilmente transportable en distintos tipos de contenedores (cilindros, camiones, y tuberías de transmisión o redes y gasoductos. Con frecuencia es la principal y a veces la única energía moderna disponible, ya que permite contar con uno de los combustibles más limpios y de fácil uso (mucho más cómodo que la parafina/kerosene).</p>
+              <p>El GLP está desplazando a los combustibles sólidos como el carbón, la madera y el carbón vegetal que producen polvo, suciedad y humo que causan serios problemas a la salud. En consecuencia, el GLP contribuye de manera importante al mejoramiento de los niveles de calidad del aire en los hogares, en cocinas comerciales y restaurantes. Ya no se requiere apilar ni almacenar combustibles sólidos a nivel doméstico, ni preparar ni limpiar artefactos cada vez que se utilizan. Además el GLP elimina el riesgo de quemaduras provocadas por las brasas.</p>
+              <h4>PRODUCCIÓN</h4>
+              <p>Refinación. Se puede obtener de la destilación primaria, como también de los demás procesos a los que son sometidos otros productos de la destilación del petróleo como: el reformado catalítico, cracking catalítico, steam cracking, alquilación, cracking térmico, etc.</p>
+              <div className={textCenter} style={{ maxWidth: '100%', height: 'auto' }}><img src="../../static/gas/refinacion.png" className={mb4} style={{ maxWidth: '100%', height: 'auto' }} alt="Molécula de metano" /></div>
+              <div className={textCenter} style={{ maxWidth: '100%', height: 'auto' }}><img src="../../static/gas/refinacion2.png" className={mb4} style={{ maxWidth: '100%', height: 'auto' }} alt="Molécula de metano" /></div>
             </Grid>
           </Grid>
         </article>

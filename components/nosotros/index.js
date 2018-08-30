@@ -7,23 +7,6 @@ import Icon from 'material-ui/Icon'
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
 import * as Components from './components'
 
-
-const STYLES = theme => ({
-  ...flex,
-  ...globalStyles,
-  ...nosotros,
-  buttonPressed: {
-    backgroundColor: '#ff9c00 !important'
-  },
-  mobileCss: {
-    '&': {
-      '@media (max-width: 376px)': {
-        width: '100%'
-      },
-    },
-  },
-})
-
 const data = [
   {
     title: 'Quiénes Somos',
@@ -62,14 +45,25 @@ class Nosotros extends Component {
     view: 'quienessomos'
   }
   handleClick = item => {
+    window.location.hash = item.path
     this.setState({ view: item.path })
   }
   getComponent = view => {
     const C = Components[view]
     return C ? <C /> : <div />
   }
+
   render() {
-    const { classes } = this.props
+    const { classes, url } = this.props
+    if (url && url.asPath) {
+      const view = url.asPath.split('#')[1]
+      if (view && window && window.location) {
+        const path = window.location.hash.replace('#', '')
+        if (this.state.view !== path && this.state.view !== view) {
+          this.handleClick({ path: view })
+        }
+      }
+    }
     const { section: seccion, m0, container, h3, textCenter, listItemNosotros, listNotros, buttonPressed } = classes
     // const Componente = this.getComponent(this.state.view)
     const nameTitle = data.filter(item => item.path === this.state.view).map(item => item.title)[0]
@@ -111,5 +105,21 @@ class Nosotros extends Component {
 Nosotros.propTypes = {
   classes: PropTypes.object.isRequired,
 }
+
+const STYLES = theme => ({
+  ...flex,
+  ...globalStyles,
+  ...nosotros,
+  buttonPressed: {
+    backgroundColor: '#ff9c00 !important'
+  },
+  mobileCss: {
+    '&': {
+      '@media (max-width: 376px)': {
+        width: '100%'
+      },
+    },
+  },
+})
 
 export default withStyles(STYLES, { name: 'WiNosotros' })(Nosotros)

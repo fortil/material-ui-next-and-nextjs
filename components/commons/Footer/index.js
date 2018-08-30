@@ -6,7 +6,7 @@ import Icon from 'material-ui/Icon'
 import { footer, globalStyles, flex } from '../../../src/styles'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faFacebookSquare, faTwitterSquare } from '@fortawesome/fontawesome-free-brands'
-
+const { sedes: data } = require('../../../config.json').footer
 const styles = {
   ...footer,
   ...globalStyles, ...flex,
@@ -44,31 +44,6 @@ const styles = {
     minWidth: 24
   }
 }
-
-const data = [
-  {
-    dir: 'Cra. 16 No. 46-24 - B Los Pinos',
-    tel: '866 2076',
-    cel: '311 812 1591',
-    city: 'Neiva - Huila'
-  },
-  {
-    dir: 'Cra. 1B No. 4 - 58',
-    tel: '835 2592 - 836 7407',
-    cel: '312 351 2890',
-    city: 'Pitalito - Huila'
-  },
-  {
-    dir: 'Salida a Pitalito KM2 Barrio la Reserva Estación de Servicio SURGAS S.A. E.S.P.',
-    cel: '321 375 3539',
-    city: 'Mocoa - Putumayo'
-  },
-  {
-    dir: 'Cra 19 N. 11-54 Barrio Las Americas',
-    cel: '316 397 3186',
-    city: 'Puerto Asís - Putumayo'
-  },
-]
 
 class Footer extends React.Component {
   render() {

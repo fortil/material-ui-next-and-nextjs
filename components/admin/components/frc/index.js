@@ -101,7 +101,7 @@ const list = connect(mapStateToPropsList, mapDispatchToPropsList)(List)
 export default {
   create,
   list,
-  permissions: ['Atención Usuario'],
+  permissions: ['FCR'],
   links: [
     { icon: 'view_list', txt: 'FCR', primary: 'FCR', secondary: '', url: '/admin?page=fcr&view=list', as: '/admin/fcr' },
     { icon: 'add_box', txt: 'Crear', primary: 'Crear FCR', secondary: '', url: '/admin?page=fcr&view=create', as: '/admin/fcr/create' }

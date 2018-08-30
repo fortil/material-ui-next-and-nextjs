@@ -72,7 +72,7 @@ class IngreseHojaDeVidaComponent extends Component {
               errores.push(this.state[key])
             }
           })
-          console.log(errores, '=>>>>')
+          
           if (errores.length) {
             errores.forEach(e => {
               this.setState({
@@ -110,9 +110,13 @@ class IngreseHojaDeVidaComponent extends Component {
   }
   handleChange = key => evt => {
     if (key === 'file') {
-      this.setState({
-        [key]: Object.assign({}, this.state[key], { val: evt.target.value, error: false })
-      })
+      if (evt.target.files[0].size < 8e+6) {
+        this.setState({
+          [key]: Object.assign({}, this.state[key], { val: evt.target.files[0], error: false })
+        })
+      } else {
+        swal('El archivo excede los 8MB', 'Por favor ingrese un archivo menor a 8 MB', 'warning')
+      }
     } else {
       let error = false
       let msgError = ''

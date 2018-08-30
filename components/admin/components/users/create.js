@@ -151,7 +151,16 @@ class CreateUsers extends React.Component {
                   // helperText="Please select your currency"
                   margin="normal"
                 >
-                  {[{ label: '', value: '' }, { label: 'Admin', value: 'a' }, { label: 'Publicador', value: 'p' }, { label: 'Atención al Usuario', value: 'u' }, { label: 'Compras', value: 'c' }].map(option => (
+                  {[
+                    { label: '', value: '' }, 
+                    { label: 'Admin', value: 'a' }, 
+                    { label: 'Publicador', value: 'p' }, 
+                    { label: 'Atención al Usuario', value: 'u' }, 
+                    { label: 'Compras', value: 'c' },
+                    { label: 'RTR', value: 'r' },
+                    { label: 'FCR', value: 'f' },
+                    { label: 'Notificaiones', value: 'n' }
+                  ].map(option => (
                     <option key={option.value} value={option.value} style={{ fontSize: 13 }}>
                       {option.label}
                     </option>
