@@ -4,5 +4,6 @@ launchConfigurations/
 out/
 .env
 .firebaserc
+.firebase
 *.yml
 config.json

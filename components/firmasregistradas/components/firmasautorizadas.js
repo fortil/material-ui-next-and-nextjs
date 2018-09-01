@@ -12,6 +12,7 @@ const columnData = [
   { id: 'phone', label: 'Teléfono' },
   { id: 'sicRegistry', label: 'No Registro ante la SIC' },
   { id: 'legalRepresentative', label: 'Representante Legal' },
+  { id: 'tipo', label: 'Reparadora o Inspectora' },
   { id: 'surgasRegistry', label: 'No registro SURGAS' },
 ]
 

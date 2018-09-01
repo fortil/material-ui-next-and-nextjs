@@ -159,7 +159,7 @@ class CreateUsers extends React.Component {
                     { label: 'Compras', value: 'c' },
                     { label: 'RTR', value: 'r' },
                     { label: 'FCR', value: 'f' },
-                    { label: 'Notificaiones', value: 'n' }
+                    { label: 'Notificaciones', value: 'n' }
                   ].map(option => (
                     <option key={option.value} value={option.value} style={{ fontSize: 13 }}>
                       {option.label}

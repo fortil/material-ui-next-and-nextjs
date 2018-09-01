@@ -14,7 +14,10 @@ const inputs = [
   { icon: '', type: 'text', name: 'phone', label: 'Teléfono' },
   { icon: '', type: 'text', name: 'sicRegistry', label: 'No de registro ante SIC' },
   { icon: '', type: 'text', name: 'legalRepresentative', label: 'Nombre del representante legal' },
-  { icon: '', type: 'text', name: 'surgasRegistry', label: 'No de registro ante Sur Colombiana de Gas S.A' }
+  { icon: '', type: 'text', name: 'surgasRegistry', label: 'No de registro ante SURGAS' },
+  { icon: '', type: 'select', name: 'type', label: 'Reparadora o Inspectora', choices: [
+    {value: 'Reparadora', label: 'Reparadora'}, {value: 'Inspectora', label: 'Inspectora'}
+  ] }
 ]
 class Create extends Component {
   render() {
@@ -57,6 +60,7 @@ const columnData = [
   { id: 'address', numeric: false, disablePadding: true, label: 'Dirección' },
   { id: 'phone', numeric: false, disablePadding: true, label: 'Teléfono' },
   { id: 'sicRegistry', numeric: false, disablePadding: true, label: 'No Registro ante la SIC' },
+  { id: 'type', numeric: false, disablePadding: true, label: 'Reparadora o Inspectora' },
   { id: 'legalRepresentative', numeric: false, disablePadding: true, label: 'Representante Legal' },
   { id: 'surgasRegistry', numeric: false, disablePadding: true, label: 'No registro SURGAS' },
 ]
