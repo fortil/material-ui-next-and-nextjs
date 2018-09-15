@@ -16,7 +16,7 @@ const data = [
     icon: 'check_circle_outline'
   },
   {
-    title: 'Riquisitos',
+    title: 'Requisitos',
     path: 'requisitos',
     desc: 'Requisitos para registrar la firma',
     // descripcion: 'El directorio de proveedores es una herramienta de búsqueda de proveedores potenciales, utilizada por SURGAS de Colombia dentro de sus sos de compra. Si desea registrarse debe diligenciar el siguiente formulario:',
