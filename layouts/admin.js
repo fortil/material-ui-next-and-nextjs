@@ -57,7 +57,7 @@ class AdminLayout extends React.Component {
           </div>
           {
             Object.keys(Components).map((key, i) => {
-              const hasPerms = isAdmin ? true : role.reduce(
+              const hasPerms = isAdmin ? true : role.split(',').reduce(
                 (prev, curr) => Components[key].permissions.includes(curr) ? true : prev
                 , false)
               return (
