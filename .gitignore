@@ -6,5 +6,4 @@ out/
 .firebaserc
 .firebase
 *.yml
-config.json
 .DS_Store

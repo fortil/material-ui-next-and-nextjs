@@ -12,7 +12,9 @@
     "clean:win": "rd /q /s .next &&  rd /q /s out",
     "clean": "rm -rf .next &&  rm -rf out",
     "static": "npm run clean && npm run build && npm run export",
-    "deploy": "npm run clean && npm run build && npm run export && firebase deploy"
+    "static:win": "npm run clean:win && npm run build && npm run export",
+    "deploy": "npm run clean && npm run build && npm run export && firebase deploy",
+    "deploy:win": "npm run clean:win && npm run build && npm run export && firebase deploy"
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",

@@ -14,6 +14,8 @@ import { openModal } from '../../../../redux/reducers/modal'
 import { createUser } from '../../../../lib/http'
 import { connect } from 'react-redux'
 import Router from 'next/router'
+const userRoles = require('../../../../config.json')['user-roles']
+
 
 const styles = theme => ({
   root: {
@@ -151,16 +153,7 @@ class CreateUsers extends React.Component {
                   // helperText="Please select your currency"
                   margin="none"
                 >
-                  {[
-                    { label: '', value: '' }, 
-                    { label: 'Admin', value: 'a' }, 
-                    { label: 'Publicador', value: 'p' }, 
-                    { label: 'Atención al Usuario', value: 'u' }, 
-                    { label: 'Compras', value: 'c' },
-                    { label: 'RTR', value: 'r' },
-                    { label: 'FCR', value: 'f' },
-                    { label: 'Notificaciones', value: 'n' }
-                  ].map(option => (
+                  {userRoles.map(option => (
                     <option key={option.value} value={option.value} style={{ fontSize: 13 }}>
                       {option.label}
                     </option>

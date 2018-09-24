@@ -17,6 +17,7 @@ import { INITIAL_STATE_USERS } from '../../../../redux/reducers/users'
 import { updateUser } from '../../../../lib/http'
 import { connect } from 'react-redux'
 import Router from 'next/router'
+const userRoles = require('../../../../config.json')['user-roles']
 
 const styles = theme => ({
   root: {
@@ -49,13 +50,15 @@ const styles = theme => ({
   },
   ...globalStyles, ...flex
 })
-const roles = {
-  Editor: 'e',
-  'Atención Usuario': 'u',
-  Compras: 'c',
-  Publicador: 'p',
-  Admin: 'a'
-}
+const roles = Object.assign({}, ...userRoles.map(role => ({ [role.label]: role.value })))
+// {
+//   Editor: 'e',
+//   'Atención Usuario': 'u',
+//   Compras: 'c',
+//   Publicador: 'p',
+//   Admin: 'a'
+// }
+
 class CreateUsers extends React.Component {
   state = {
     id: '',
@@ -70,7 +73,7 @@ class CreateUsers extends React.Component {
     this.setState({ [prop]: event.target.value })
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const user = this.props.users.filter(u => u.id === this.props.id)[0]
     this.setState({
       email: user.email,
@@ -81,7 +84,7 @@ class CreateUsers extends React.Component {
       role: roles[user.roles[0]],
     })
   }
-  
+
 
   updateUser = () => {
     const v = Object.values(this.state).filter(e => e === '')
@@ -121,7 +124,7 @@ class CreateUsers extends React.Component {
                 </IconButton>
               </Tooltip>
             }
-          />  
+          />
           <CardContent>
             <Grid container className={classes.container}>
               <Grid item md={4} className={classes.mt3} style={{ display: 'flex', flexFlow: 'column wrap' }}>
@@ -178,7 +181,7 @@ class CreateUsers extends React.Component {
                   // helperText="Please select your currency"
                   margin="none"
                 >
-                  {[{ label: '', value: '' }, { label: 'Admin', value: 'a' }, { label: 'Publicador', value: 'p' }, { label: 'Atención al Usuario', value: 'u' }, { label: 'Compras', value: 'c' }].map(option => (
+                  {userRoles.map(option => (
                     <option key={option.value} value={option.value} style={{ fontSize: 11 }}>
                       {option.label}
                     </option>
