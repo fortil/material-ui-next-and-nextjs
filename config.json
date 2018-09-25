@@ -8,7 +8,7 @@
     { "label": "RTR", "value": "r" },
     { "label": "FCR", "value": "f" }
   ],
-  "api": "https://surgasapi.azurewebsites.net",
+  "api": "https://surgasservices.azurewebsites.net",
   "home": {
     "our-services": [
       { "title": "Gas Natural Comprimido GNC", "text": "Más conocido por la sigla GNC, es esencialmente gas natural almacenado a altas presiones.", "img": "icon1_03.png", "link": "/nuestros-servicios#que-es-gas-natural-comprimido"
