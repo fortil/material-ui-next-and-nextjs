@@ -38,9 +38,6 @@ const mapDispatchToPropsCreate = dispatch => ({
   createFn: data => dispatch(actionHttp('fcrmailshot', 'create', data, 'formData')),
 })
 
-// const mapStateToProps = (state = { modal: INITIAL_STATE_MODAL }) => ({
-//   modal: state.modal
-// })
 const create = connect(null, mapDispatchToPropsCreate)(Create)
 
 
@@ -90,7 +87,7 @@ const list = connect(mapStateToPropsList, mapDispatchToPropsList)(List)
 export default {
   create,
   list,
-  permissions: ['Atención Usuario'],
+  permissions: ['FCR'],
   links: [
     { icon: 'view_list', txt: 'FCRC', primary: 'Circulares', secondary: '', url: '/admin?page=cfr&view=list', as: '/admin/circulares' },
     { icon: 'add_box', txt: 'Crear', primary: 'Crear Circular', secondary: '', url: '/admin?page=cfr&view=create', as: '/admin/circular/create' }
