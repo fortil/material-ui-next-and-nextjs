@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 const columnData = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Nombre de la Circular' },
-  { id: 'url', numeric: false, disablePadding: true, label: 'Enlace' },
+  { id: 'url', numeric: false, disablePadding: true, label: 'Enlace', prepare: [val => <a href={`${val}`} >Descarga la circular aquí...</a>] },
   { id: 'creationDate', numeric: false, disablePadding: true, label: 'Creado' },
 ]
 class Firmas extends React.Component {

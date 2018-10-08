@@ -6,6 +6,9 @@ import Grid from 'material-ui/Grid'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faFilePdf } from '@fortawesome/fontawesome-free-solid'
 
+const config = require('../../../config.json')
+const apiFiles = config['api_files']
+
 const STYLES = theme => ({
   ...flex,
   ...globalStyles,
@@ -46,14 +49,10 @@ const files = {
 }
 
 class Politicas extends Component {
-  // state = Object.assign({}, files)
 
-  // onDocumentLoad = key => ({ numPages }) => {
-  //   this.setState({ [key]: Object.assign({}, this.state[key], { numPages }) })
-  // }
   render() {
     const { classes } = this.props
-    const { section: seccion, m0, container, /* h3, mb4, textCenter, title, */ p0 } = classes
+    const { section: seccion, m0, container, p0 } = classes
 
     return (
       <article className={[seccion, m0, p0].join(' ')}>
@@ -62,7 +61,7 @@ class Politicas extends Component {
             Object.keys(files).map((keyFile, i, array) => {
               const name = decodeURIComponent(keyFile).replace(/^(.*\-\d+\s{0,100})/ig, '')
               return <Grid key={i} item md={4}>
-                <a href={`https://surgas.blob.core.windows.net/pdfpoliticas/${keyFile}.pdf`} target="_blank"
+                <a href={`${apiFiles}/pdfpoliticas/${keyFile}.pdf`} target="_blank"
                   style={{ textDecoration: 'none', color: '#787878' }}
                 >
                   <Grid container direction="column" alignItems="center">

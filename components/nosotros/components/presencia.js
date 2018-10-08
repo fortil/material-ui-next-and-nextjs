@@ -10,6 +10,7 @@ import {
 import { MarkerClusterer } from 'react-google-maps/lib/components/addons/MarkerClusterer'
 const config = require('../../../config.json')
 const data = config['map-points']
+const googleMapsKey = config['google_maps_key']
 // const data = [
   // {
   //   id: 1,
@@ -34,7 +35,7 @@ const Presencia = compose(
   ),
   withProps({
     googleMapURL:
-      'https://maps.googleapis.com/maps/api/js?key=AIzaSyCa7BH5_vLUYCIevtvmBnoHnI6LniHSTOw&v=3.exp&libraries=geometry,drawing,places',
+      `https://maps.googleapis.com/maps/api/js?key=${googleMapsKey}&v=3.exp&libraries=geometry,drawing,places`,
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `450px` }} />,
     mapElement: <div style={{ height: `100%` }} />

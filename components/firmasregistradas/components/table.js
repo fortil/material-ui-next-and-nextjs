@@ -159,7 +159,7 @@ class EnhancedTable extends React.Component {
   }
 
   componentWillMount() {
-    this.props.getInitFn(true)
+    this.props.getInitFn(true).then(console.log).catch(console.log)
   }
 
   componentWillReceiveProps({ data }) {
@@ -246,7 +246,9 @@ class EnhancedTable extends React.Component {
                     style={{ maxWidth: 250 }}
                   >
                     {columnData.map(e => {
-                      return <TableCell padding='none' style={{ fontSize: 10, textAlign: 'center' }}>{n[e.id]}</TableCell>
+                      return <TableCell padding='none' style={{ fontSize: 10, textAlign: 'center' }}>
+                        {e.prepare && e.prepare.length ? e.prepare.reduce((prev, curr) => curr(prev), n[e.id]) : n[e.id]}
+                      </TableCell>
                     })}
                   </TableRow>
                 );

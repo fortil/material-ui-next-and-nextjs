@@ -6,6 +6,9 @@ import Grid from 'material-ui/Grid'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faFilePdf } from '@fortawesome/fontawesome-free-solid'
 
+const config = require('../../../config.json')
+const apiFiles = config['api_files']
+
 const STYLES = () => ({
   ...flex,
   ...globalStyles,
@@ -16,11 +19,11 @@ const STYLES = () => ({
 
 const files = [
   {
-    link: 'https://surgas.blob.core.windows.net/fcrinscripciondocs/CR-FO-80%20SOLICITUD%20DE%20INSCRIPCION%20EN%20EL%20REGISTRO%20FCR%20PERSONA%20JURIDICA.pdf',
+    link: `${apiFiles}/fcrinscripciondocs/CR-FO-80%20SOLICITUD%20DE%20INSCRIPCION%20EN%20EL%20REGISTRO%20FCR%20PERSONA%20JURIDICA.pdf`,
     name: 'Persona natural'
   },
   {
-    link: 'https://surgas.blob.core.windows.net/fcrinscripciondocs/CR-FO-80%20SOLICITUD%20DE%20INSCRIPCION%20EN%20EL%20REGISTRO%20FCR%20PERSONA%20JURIDICA.pdf',
+    link: `${apiFiles}/fcrinscripciondocs/CR-FO-80%20SOLICITUD%20DE%20INSCRIPCION%20EN%20EL%20REGISTRO%20FCR%20PERSONA%20JURIDICA.pdf`,
     name: 'Persona jurídica'
   },
 ]
