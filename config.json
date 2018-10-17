@@ -8,7 +8,7 @@
     { "label": "RTR", "value": "r" },
     { "label": "FCR", "value": "f" }
   ],
-  "api": "https://200.122.247.84:443",
+  "api": "http://200.122.247.84:81",
   "api_files": "https://surgasneiva.blob.core.windows.net",
   "google_maps_key": "aqui va la key",
   "home": {
