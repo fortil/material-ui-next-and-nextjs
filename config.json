@@ -3,14 +3,14 @@
     { "label": "", "value": "" }, 
     { "label": "Admin", "value": "a" }, 
     { "label": "Publicador", "value": "p" }, 
-    { "label": "Atención al Usuario", "value": "u" }, 
+    { "label": "Atención Usuario", "value": "u" }, 
     { "label": "Compras", "value": "c" },
     { "label": "RTR", "value": "r" },
     { "label": "FCR", "value": "f" }
   ],
-  "api": "https://200.122.247.84:443",
+  "api": "http://200.122.247.84:81",
   "api_files": "https://surgasneiva.blob.core.windows.net",
-  "google_maps_key": "aqui va la key",
+  "google_maps_key": "AIzaSyDIm_d1rbt7ovjiLHtn8KRAOI_cwyZAG1E",
   "home": {
     "our-services": [
       { "title": "Gas Natural Comprimido GNC", "text": "Más conocido por la sigla GNC, es esencialmente gas natural almacenado a altas presiones.", "img": "icon1_03.png", "link": "/nuestros-servicios#que-es-gas-natural-comprimido"
@@ -24,9 +24,9 @@
 	"footer": {
 		"sedes": [
 			{
-				"dir": "Cra. 16 No. 46-24 - B Los Pinos",
-				"tel": "866 2076",
-				"cel": "311 812 1591",
+				"dir": "Cra. 10 No. 6-27 - Barrio Altico",
+				"tel": "871 4264",
+				"cel": "311 812 1591. Tel. 871 4264 ",
 				"city": "Neiva - Huila"
 			},
 			{

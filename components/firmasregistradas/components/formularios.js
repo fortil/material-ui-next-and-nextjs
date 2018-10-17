@@ -19,7 +19,7 @@ const STYLES = () => ({
 
 const files = [
   {
-    link: `${apiFiles}/fcrinscripciondocs/CR-FO-80%20SOLICITUD%20DE%20INSCRIPCION%20EN%20EL%20REGISTRO%20FCR%20PERSONA%20JURIDICA.pdf`,
+    link: `${apiFiles}/fcrinscripciondocs/CR-FO-79%20SOLICITUD%20DE%20INSCRIPCION%20EN%20EL%20REGISTRO%20FCR%20PERSONA%20NATURAL.pdf`,
     name: 'Persona natural'
   },
   {
