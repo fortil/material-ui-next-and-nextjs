@@ -11,6 +11,7 @@ import { sanitizeHtml, sortArrayByDate } from '../../lib/utils'
 import { connect } from 'react-redux'
 import { INITIAL_STATE_NEWS } from '../../redux/reducers/news'
 import YouTube from 'react-youtube'
+import Logo from '../../static/logo.png'
 
 const STYLES = () => ({
   ...flex,
@@ -55,7 +56,7 @@ class BlogHome extends Component {
           <Grid item xs={12}>
             <Grid spacing={24} container>
               {entries.length ? entries.slice(0, 8).map((show, _, array) => {
-                const image = show.imageUrl ? show.imageUrl : `../../static/blog/blog-vintage-1.jpg`
+                const image = show.imageUrl ? show.imageUrl : Logo
                 const l = array.length > 4 ? 8 - array.length : array.length
                 const con = 4
                 let md = 12
@@ -71,12 +72,14 @@ class BlogHome extends Component {
                 return (
                   <Grid item md={md} key={show.id} className={classes.hover}>
                     <Link href={`/noticias?id=${show.id}`}><a style={{ textDecoration: 'none' }}>
-                      {show.youtube ? <YouTube
+                      {
+                        show.imageUrl ? <div className={classes.centerCropped} data-da='asdadasd' style={{ backgroundImage: `url('${show.imageUrl}')` }}></div> :
+                        show.youtube && show.youtube !== 'false' ? <YouTube
                         videoId={show.youtube} opts={{ height: hVideo, width: wVideo }}
                         onReady={evt => evt.target.pauseVideo()}
-                      /> : <div className={classes.centerCropped} style={{ backgroundImage: `url(${image})` }}></div>}  
+                        /> : <div className={classes.centerCropped} style={{ backgroundImage: `url(${image})` }}></div>
+                      }  
                     </a></Link>
-                    {/* <div className={classes.centerCropped}></div> */}
                     <div className={[mt3, mb4].join(' ')} style={{maxWidth: '100vw'}}>
                       <article style={{ display: 'block' }}>
                         <h4>
