@@ -18,7 +18,8 @@ const STYLES = theme => ({
 })
 
 const files = {
-  'DE-POL-01%20Pol%C3%ADtica%20de%20seguridad%20y%20salud%20en%20el%20trabajo': {
+  
+  'DE-POL-08%20Pol%C3%ADtica%20de%20gestion%20integral': {
     numPages: null,
     pageNumber: 1,
   },
@@ -26,22 +27,22 @@ const files = {
     numPages: null,
     pageNumber: 1,
   },
-  'DE-POL-03%20Pol%C3%ADtica%20medio%20ambiental': {
-    numPages: null,
-    pageNumber: 1,
-  },
+  //'DE-POL-03%20Pol%C3%ADtica%20medio%20ambiental': {
+  //  numPages: null,
+  //  pageNumber: 1,
+  //},
   'DE-POL-04%20Pol%C3%ADtica%20de%20seguridad%20vial': {
     numPages: null,
     pageNumber: 1,
   },
-  'DE-POL-05%20Pol%C3%ADtica%20de%20elementos%20de%20protecci%C3%B3n%20personal': {
-    numPages: null,
-    pageNumber: 1,
-  },
-  'DE-POL-06%20Pol%C3%ADtica%20de%20Calidad': {
-    numPages: null,
-    pageNumber: 1,
-  },
+  //'DE-POL-05%20Pol%C3%ADtica%20de%20elementos%20de%20protecci%C3%B3n%20personal': {
+  //  numPages: null,
+  //  pageNumber: 1,
+  //},
+  //'DE-POL-06%20Pol%C3%ADtica%20de%20Calidad': {
+  //  numPages: null,
+  //  pageNumber: 1,
+  //},
   'DE-POL-07%20Pol%C3%ADtica%20de%20privacidad%20y%20tratamiento%20de%20datos%20personales': {
     numPages: null,
     pageNumber: 1,
