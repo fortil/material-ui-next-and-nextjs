@@ -70,9 +70,11 @@ class HeadBar extends React.Component {
                   </div>
                 </div>  
                 <div className={[classes.flex, classes.alignItemsCenter].join(' ')} style={{ marginLeft: 25 }}>
+                  <a href="https://webmail.surgas.com/" target="_blank" >
                   <IconButton className={[classes.featureBoxIcon, classes.icns].join(' ')} color="inherit" aria-label="Menu">
                     <Icon style={{ color: '#ff9c00' }}>email</Icon>  
                   </IconButton>
+                  </a>
                   <div className={classes.featureBoxInfo}>
                     <h4 className={[classes.mb0, classes.h4].join(' ')}>
                       surgas@surgas.com
