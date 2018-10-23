@@ -12,7 +12,7 @@ import { INITIAL_STATE_NEWS } from '../../redux/reducers/news';
 import YouTube from 'react-youtube';
 import Logo from '../../static/logo.png';
 
-const STYLES = (theme) => ({
+const STYLES = () => ({
 	...flex,
 	...globalStyles,
 	...posts,
