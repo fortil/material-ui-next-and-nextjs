@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { globalStyles, flex, nosotros, colors } from '../../src/styles';
+import { globalStyles, flex, colors } from '../../src/styles';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
