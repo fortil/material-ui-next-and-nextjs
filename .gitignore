@@ -7,3 +7,4 @@ out/
 .firebase
 *.yml
 .DS_Store
+*.zip
