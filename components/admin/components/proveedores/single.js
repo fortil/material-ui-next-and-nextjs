@@ -24,9 +24,9 @@ const fields = {
 	contactName: '',
 	email: '',
 	address: '',
-  rutUrl: '',
-  ccioUrl: '',
-  briefcaseUrl: '',
+	rutUrl: '',
+	ccioUrl: '',
+	briefcaseUrl: ''
 };
 
 const translate = {
@@ -40,9 +40,9 @@ const translate = {
 	address: 'Dirección',
 	createdAt: 'Inscrito',
 	active: 'Activo',
-  rutUrl: 'Rut',
-  ccioUrl: 'Cámara de Comercio',
-  briefcaseUrl: 'Portafolio',
+	rutUrl: 'Rut',
+	ccioUrl: 'Cámara de Comercio',
+	briefcaseUrl: 'Portafolio'
 };
 
 class ViewSingleProvider extends React.Component {
@@ -71,7 +71,7 @@ class ViewSingleProvider extends React.Component {
 	render() {
 		const { classes } = this.props;
 		const keys = Object.keys(this.state.provider).filter(
-			(e) => !e.includes('Url') && e !== 'lastTimeStamp' && e !== 'supplierDetails' && e !== 'id'
+			(e) => /* !e.includes('Url') && */ e !== 'lastTimeStamp' && e !== 'supplierDetails' && e !== 'id'
 		);
 		const servicios = Object.keys(this.state.services);
 		return (
@@ -108,20 +108,31 @@ class ViewSingleProvider extends React.Component {
 										{translate[key]}
 										{/* <Icon>face</Icon> */}
 									</InputLabel>
-									<Input
-										id={key}
-										style={{ fontSize: 13, width: '95%' }}
-										value={
-											key === 'active' ? this.state.provider[key] ? (
-												'Si'
-											) : (
-												'No'
-											) : (
-												this.state.provider[key]
-											)
-										}
-										disabled
-									/>
+									{!key.includes('Url') ? (
+										<Input
+											id={key}
+											style={{ fontSize: 13, width: '95%' }}
+											value={
+												key === 'active' ? this.state.provider[key] ? (
+													'Si'
+												) : (
+													'No'
+												) : (
+													this.state.provider[key]
+												)
+											}
+											disabled
+										/>
+									) : (
+										<a
+											variant="raised"
+											href={this.state.provider[key]}
+											// className={classes.button}
+											style={{ fontSize: 13, width: '95%' }}
+										>
+											Descargar
+										</a>
+									)}
 								</Grid>
 							))}
 						</Grid>

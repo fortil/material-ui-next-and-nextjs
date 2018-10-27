@@ -22,7 +22,8 @@ import { youtube_parser } from '../../../../lib/utils';
 class UpdateEntry extends React.Component {
 	constructor(props) {
 		super(props);
-		const entry = props.news.filter((u) => u.id === props.id)[0];
+    const entry = props.news.filter((u) => u.id === props.id)[0];
+    console.log('Entrada de youtube entry: ', entry)
 		this.state = {
 			id: entry.id,
 			ispublic: entry.isPublic,
@@ -37,9 +38,9 @@ class UpdateEntry extends React.Component {
 			html: '',
 			htmlError: '',
 			important: entry.important,
-			youtube: entry.youtube,
+      youtube: entry.youtube && entry.youtube !== 'false' ? entry.youtube : false,
 			youtubeUrl:
-				entry.youtube && entry.youtube !== 'false' ? 'https://www.youtube.com/watch?v=' + entry.youtube : false
+				entry.youtube && entry.youtube !== 'false' ? 'https://www.youtube.com/watch?v=' + entry.youtube : ''
 		};
 	}
 
@@ -138,7 +139,6 @@ class UpdateEntry extends React.Component {
 
 	render() {
 		const { classes } = this.props;
-
 		return (
 			<div className={classes.root}>
 				<Card className={classes.card70}>

@@ -200,56 +200,59 @@ class ComponentTable extends React.Component {
 		this.setState({ data, order, orderBy });
 	};
 
-	handleClick = (action, provider) => {
+	handleClick = ({ fn: action, ...other }, provider) => {
 		let prov = Object.assign({}, provider);
 		const redirect = this.props.redirect;
-
-		swal({
-			title: 'Seguro que desea realizar esta acción?',
-			text: '',
-			icon: 'warning',
-			buttons: {
-				cancel: {
-					text: 'Cancelar',
-					value: null,
-					visible: true,
-					closeModal: true
-				},
-				confirm: {
-					text: 'Aceptar',
-					value: true,
-					visible: true,
-					closeModal: false
-				}
-			}
-		})
-			.then((result) => {
-				if (result) {
-					return action(prov, { ...this.state });
-				} else {
-					throw null;
-				}
-			})
-			.then(() => {
-				this.props.getInitFn(true);
-				swal('Actualizado con éxito!', 'Has actualizado exitosamente un registro!!', 'success').then(() => {
-					if (redirect) {
-						Router.push(redirect.url, redirect.path);
+		if (other.hasOwnProperty('askToAction') && other.askToAction === false) {
+			action(prov, { ...this.state });
+		} else {
+			swal({
+				title: 'Seguro que desea realizar esta acción?',
+				text: '',
+				icon: 'warning',
+				buttons: {
+					cancel: {
+						text: 'Cancelar',
+						value: null,
+						visible: true,
+						closeModal: true
+					},
+					confirm: {
+						text: 'Aceptar',
+						value: true,
+						visible: true,
+						closeModal: false
 					}
-				});
+				}
 			})
-			.catch((error) => {
-				if (error) {
-					swal(error.message, error.detail, 'error').then(() => {
+				.then((result) => {
+					if (result) {
+						return action(prov, { ...this.state });
+					} else {
+						throw null;
+					}
+				})
+				.then(() => {
+					this.props.getInitFn(true);
+					swal('Actualizado con éxito!', 'Has actualizado exitosamente un registro!!', 'success').then(() => {
 						if (redirect) {
 							Router.push(redirect.url, redirect.path);
 						}
 					});
-				}
-				swal.stopLoading();
-				swal.close();
-				this.props.getInitFn(true);
-			});
+				})
+				.catch((error) => {
+					if (error) {
+						swal(error.message, error.detail, 'error').then(() => {
+							if (redirect) {
+								Router.push(redirect.url, redirect.path);
+							}
+						});
+					}
+					swal.stopLoading();
+					swal.close();
+					this.props.getInitFn(true);
+				});
+		}
 	};
 
 	handleChangePage = (_, page) => {
@@ -302,18 +305,19 @@ class ComponentTable extends React.Component {
 												selected={false}
 											>
 												{actions && actions.length ? (
-													actions.map((action, i) => {
-														const active = this.state.active;
-														const show =
-															action.showOnlyActive && active === true
-																? true
-																: action.showOnlyDeActive && active === false
+													<TableCell padding="checkbox">
+														{actions.map((action, i) => {
+															const active = this.state.active;
+															const show =
+																action.showOnlyActive && active === true
 																	? true
-																	: action.show ? true : false;
-														if (show) {
-															return (
-																<TableCell padding="checkbox" key={i}>
+																	: action.showOnlyDeActive && active === false
+																		? true
+																		: action.show ? true : false;
+															if (show) {
+																return (
 																	<Tooltip
+																		key={i}
 																		title={
 																			active === true ? (
 																				action.labelActive
@@ -323,8 +327,7 @@ class ComponentTable extends React.Component {
 																		}
 																	>
 																		<IconButton
-																			onClick={() =>
-																				this.handleClick(action.fn, n)}
+																			onClick={() => this.handleClick(action, n)}
 																		>
 																			<Icon style={{ fontSize: 16 }}>
 																				{active === true ? (
@@ -335,10 +338,10 @@ class ComponentTable extends React.Component {
 																			</Icon>
 																		</IconButton>
 																	</Tooltip>
-																</TableCell>
-															);
-														}
-													})
+																);
+															}
+														})}
+													</TableCell>
 												) : (
 													''
 												)}
