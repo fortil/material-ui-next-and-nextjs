@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { actionHttp, getHttp } from '../../../../lib/http';
+import { filterBy } from '../../../../lib/utils';
 import { connect } from 'react-redux';
 import Form from '../form';
 import Table from '../table';
@@ -127,9 +128,9 @@ class List extends React.Component {
 
 const mapDispatchToPropsList = (dispatch) => ({
 	getFrc: () => dispatch(getHttp('fcrmailshot', 'getall')),
-	actionFrc: (data, state) => {
-		data.active = !state.active;
-		return dispatch(actionHttp('fcrmailshot', 'update', data));
+  actionFrc: (data, state) => {
+    data.active = !state.active;
+    return dispatch(actionHttp('fcrmailshot', 'update', filterBy(['id', 'active'], data), 'formData'));
 	}
 });
 const mapStateToPropsList = (state = { frcr: INITIAL_STATE_FRCR }) => ({ fcr: state.frcr.data });
