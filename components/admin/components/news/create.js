@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import IconButton from 'material-ui/IconButton';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import FormControl from 'material-ui/Form/FormControl';
 import FormControlLabel from 'material-ui/Form/FormControlLabel';
 import Switch from 'material-ui/Switch';
 import Button from 'material-ui/Button';
+import Tooltip from 'material-ui/Tooltip';
 import Icon from 'material-ui/Icon';
 import Card, { CardContent } from 'material-ui/Card';
 import { globalStyles, flex } from '../../../../src/styles';
@@ -121,10 +121,10 @@ class CreateEntry extends React.Component {
 		const links = [ ...this.state.links ];
 		links.splice(idx, 1);
 		this.setState({ links });
-  };
-  removeImage = () => {
-    this.setState({ image: {}, imageURL: null });
-  };
+	};
+	removeImage = () => {
+		this.setState({ image: {}, imageURL: null });
+	};
 
 	render() {
 		const { classes } = this.props;
@@ -253,18 +253,17 @@ class CreateEntry extends React.Component {
 							</label>
 						</FormControl>
 						<FormControl fullWidth className={classes.margin} autoComplete="off">
-							{/* <div className={[this.state.image !== '' ? classes.centerCropped : ''].join(' ')}
-                style={{ backgroundImage: `url(${this.state.image})` }}>
-              </div> */}
+              {this.state.imageURL ? <div className={classes.deletedIcon} onClick={this.removeImage}>
+                <Tooltip title="Remover esta imágen"><Icon onClick={this.removeImage}>clear</Icon></Tooltip>
+              </div> : ''}
 							<img
 								className={classes.mb4}
 								style={{ maxWidth: '100%', height: 'auto' }}
 								src={this.state.imageURL}
-                alt="Remover esta imágen"
-                onClick={this.removeImage}
+								onClick={this.removeImage}
 							/>
 						</FormControl>
-						<FormControl
+						{/* <FormControl
 							fullWidth
 							className={[ classes.margin, classes.mt3 ].join(' ')}
 							style={{ fontSize: 12 }}
@@ -289,10 +288,8 @@ class CreateEntry extends React.Component {
 									</li>
 								))}
 							</ul>
-							{/* <label htmlFor="">
-              </label> */}
-						</FormControl>
-						<FormControl fullWidth className={[ classes.margin ].join(' ')}>
+						</FormControl> */}
+						{/* <FormControl fullWidth className={[ classes.margin ].join(' ')}>
 							<Input
 								id="links"
 								style={{ fontSize: 14 }}
@@ -305,7 +302,7 @@ class CreateEntry extends React.Component {
 									</InputAdornment>
 								}
 							/>
-						</FormControl>
+						</FormControl> */}
 						<FormControl fullWidth className={[ classes.margin ].join(' ')}>
 							<Button
 								color="primary"

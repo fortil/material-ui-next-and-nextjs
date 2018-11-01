@@ -21,6 +21,19 @@ export const primaryBG = {
 
 
 export const globalStyles = {
+  centerCropped: {
+    width: '100%',
+    height: 125,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
+    backgroundRepeat: 'no-repeat'
+  },
+  deletedIcon: {
+    cursor: 'pointer',
+    position: 'absolute',
+    top: '8px',
+    right: '16px',
+  },
   h4: {
     fontSize: '1.2em',
     fontWeight: 200,

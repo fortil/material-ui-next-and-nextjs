@@ -15,6 +15,7 @@ import Logo from '../../static/logo.png';
 const STYLES = (theme) => ({
 	...flex,
 	...globalStyles,
+	centerCropped: Object.assign({}, globalStyles.centerCropped, { height: 56 }),
 	textStyle: {
 		textAlign: 'justify'
 	},
@@ -23,12 +24,6 @@ const STYLES = (theme) => ({
 	},
 	marginB: {
 		marginBottom: '100px!important'
-	},
-	centerCropped: {
-		width: '100%',
-		height: 56,
-		backgroundPosition: 'center center',
-		backgroundRepeat: 'no-repeat'
 	},
 	hover: {
 		transition: 'transform .2s',
@@ -95,7 +90,8 @@ class Entry extends Component {
 			textDark
 		} = classes;
 		const imageUrl =
-			this.state.entry.imageUrl && this.state.entry.imageUrl !== '' ? this.state.entry.imageUrl : Logo;
+      this.state.entry.imageUrl && this.state.entry.imageUrl !== '' ? this.state.entry.imageUrl : Logo;
+    
 		return (
 			<article className={[ seccion, m0, p0 ].join(' ')}>
 				<Grid container className={[ container, classes.mobileCss ].join(' ')}>
@@ -114,7 +110,7 @@ class Entry extends Component {
 								</h3>
 							</Grid>
 							<Grid item xs={12} className={[ textCenter, classes.mobileCss ].join(' ')}>
-                {this.state.entry.youtube && this.state.entry.youtube !== 'false' ? (
+								{this.state.entry.youtube && this.state.entry.youtube !== 'false' ? (
 									<YouTube
 										videoId={this.state.entry.youtube}
 										opts={{ height: '315', width: '560' }}
@@ -144,7 +140,10 @@ class Entry extends Component {
 					<Grid item md={4} style={{ marginTop: 60 }} className={classes.mobileCsss}>
 						{entries.filter((e) => e.isPublic === true && e.active === true).slice(0, 8).map((show) => {
 							const image =
-								show.imageUrl && show.imageUrl !== '' ? show.imageUrl : `../../static/logo.svg`;
+                show.imageUrl && show.imageUrl !== '' ? encodeURI(show.imageUrl) : Logo;
+              if (show.id === 8) {
+                console.log(show, image);
+              }
 							return (
 								<Grid
 									spacing={24}
@@ -165,8 +164,8 @@ class Entry extends Component {
 												) : (
 													<div
 														className={classes.centerCropped}
-														style={{ backgroundImage: `url(${image})` }}
-													/>
+														style={{ backgroundImage: `url('${image}')` }}
+                            ></div>
 												)}
 											</a>
 										</Link>
